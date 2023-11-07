@@ -126,7 +126,6 @@ require "functions.php";
 
 
 
-
 <div class="container-fluid py-5 bg-primary-subtle">
   <div class="container">
     <div class="row">
