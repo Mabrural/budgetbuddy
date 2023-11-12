@@ -106,7 +106,7 @@ require "functions.php";
   </div>
 </nav>
 
- <!-- Modal -->
+ <!-- Modal Notifikasi -->
  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -155,34 +155,88 @@ require "functions.php";
 
       <div class="col-lg-6 col-md-12 col-sm-12">
         <br>
-        <div class="card-container mt-2 p-5 bg-body-tertiary rounded">
-          <div id="carouselExample" class="carousel slide offset-lg-0">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="img/picture1.jpg" class="d-block w-100">
-              </div>
-              <div class="carousel-item">
-                <img src="img/picture2.jpg" class="d-block w-100">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <br>
-          <h1>Budget Buddy</h1>
-          <p>Budget Buddy adalah sebuah aplikasi berbasis website yang dibuat untuk membantu individu dan keluarga mengelola keuangannya dengan lebih baik. 
-          Pengelolaan keuangan yang baik dapat membantu pengguna untuk melacak pengeluaran secara akurat.</p>
+        <?php
+                    if(isset($_GET['page'])){
+                        $page = $_GET['page'];
+                        switch ($page) {
+                            case 'mahasiswa':
+                                include "page/mahasiswa/mahasiswa.php";
+                                break;
+                         
+                            case 'pegawai':
+                                include "page/pegawai/pegawai.php";
+                                break;
 
-          <p>Saat ini, masih banyak individu dan keluarga yang belum memiliki sistem untuk mengelola keuangannya. Akibatnya, mereka sering mengalami kesulitan untuk melacak pengeluaran dan melihat laporan keuangannya. Sistem aplikasi berbasis website Budget Buddy diharapkan dapat menjadi solusi untuk mengatasi masalah tersebut. 
-          Sistem ini menawarkan fitur-fitur yang mudah digunakan dan dapat membantu pengguna untuk mengelola keuangannya dengan lebih baik.
-          </p>
-        </div>
+                            case 'dosen':
+                                include "page/dosen/dosen.php";
+                                break;
+
+                            case 'jadwal':
+                                include "page/jadwal/jadwal.php";
+                                break;
+
+                            default:
+                                echo "<center><h3>Maaf. Halaman tidak di temukan!</h3></center>";
+                                break;
+                        }
+                    } else if(isset($_GET['form'])){
+                        $form = $_GET['form'];
+
+                        switch ($form) {
+                            
+
+                            case 'ubahMahasiswa':
+                                include "page/mahasiswa/ubah.php";
+                                break;
+
+                            case 'tambahMahasiswa':
+                                include "page/mahasiswa/tambah.php";
+                                break;
+
+                            case 'hapusMahasiswa':
+                                include "page/mahasiswa/hapus.php";
+                                break;
+
+                            case 'ubahDosen':
+                                include "page/dosen/ubah.php";
+                                break;
+                            case 'tambahDosen':
+                                include "page/dosen/tambah.php";
+                                break;
+                            case 'hapusDosen':
+                                include "page/dosen/hapus.php";
+                                break;
+
+                            case 'ubahPegawai':
+                                include "page/pegawai/ubah.php";
+                                break;
+                            case 'tambahPegawai':
+                                include "page/pegawai/tambah.php";
+                                break;
+                            case 'hapusPegawai':
+                                include "page/pegawai/hapus.php";
+                                break;
+
+                            case 'ubahJadwal':
+                                include "page/jadwal/ubah.php";
+                                break;
+                            case 'tambahJadwal':
+                                include "page/jadwal/tambah.php";
+                                break;
+                            case 'hapusJadwal':
+                                include "page/jadwal/hapus.php";
+                                break;
+
+                            default:
+                                echo "<center><h3>Maaf. Halaman tidak di temukan!</h3></center>";
+                                break;
+                        }
+                    }
+
+                    else{
+                        include "dashboard.php";
+                    }
+                ?>
       </div>
 
       <div class="col-lg-3 col-md-12 col-sm-12">
