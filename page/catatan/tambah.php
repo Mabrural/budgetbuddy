@@ -181,9 +181,9 @@ if (isset($_POST["submit"])) {
                 <div class="mb-3 card-title">
                     <label>Nama Anggaran</label>
                     <select class="form-select" aria-label="Default select example" name="nama_anggaran">
-                        <option value="1">--Pilih--</option>
+                        <option value="">--Pilih--</option>
                         <?php foreach($anggaran as $row) : ?>
-                        <option value="1"><?= $row['nama_anggaran']; ?></option>
+                        <option value="<?= $row['id_anggaran'];?>"><?= $row['nama_anggaran']; ?></option>
                         <?php endforeach;?>
                     </select>
                 </div>
@@ -191,9 +191,9 @@ if (isset($_POST["submit"])) {
                   <label>Kategori</label>
                     <select class="form-select" aria-label="Default select example" name="nama_kategori">
                     
-                        <option value="1">--Pilih--</option>
+                        <option value="">--Pilih--</option>
                         <?php foreach($kategori as $row)  : ?>
-                        <option value="1"> <?= $row['nama_kategori'];?></option>
+                        <option value="<?= $row['id_kategori'];?>"> <?= $row['nama_kategori'];?></option>
                         
                         <?php endforeach;?>
                     </select>

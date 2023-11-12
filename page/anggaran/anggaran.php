@@ -171,7 +171,7 @@ $anggaran = query("SELECT * FROM anggaran ORDER BY id_anggaran ASC");
 						  <td><?= $row["tgl_mulai"]; ?></td>
 						  <td><?= $row["tgl_akhir"]; ?></td>
 						  <td><a href="ubah.php?id_anggaran=<?= $row["id_anggaran"];?>"><button class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i> Ubah</button></a></td>
-						  <td><a href="hapus.php?id_anggaran=<?= $row["id_anggaran"]; ?>" onclick="return confirm('yakin?');""><button class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i> Hapus</button></a></td>
+						  <td><a href="hapus.php?id_anggaran=<?= $row["id_anggaran"]; ?>" onclick="return confirm('yakin?');"><button class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i> Hapus</button></a></td>
 						</tr>
             <?php $i++ ;?>
           <?php endforeach;?>
