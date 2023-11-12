@@ -66,7 +66,7 @@ require "functions.php";
           <a class="nav-link" style="color: white;" aria-current="page" href="index.php"><i class="fas fa-home fa-lg"></i> Menu Utama</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white;" href="page/anggaran/anggaran.php"><i class="fas fa-sitemap fa-lg"></i> Anggaran</a>
+          <a class="nav-link" style="color: white;" href="index.php?page=anggaran"><i class="fas fa-sitemap fa-lg"></i> Anggaran</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" style="color: white;" href="page/tagihan/tagihan.php"><i class="fas fa-money-bill-wave fa-lg"></i> Tagihan</a>
@@ -159,8 +159,8 @@ require "functions.php";
                     if(isset($_GET['page'])){
                         $page = $_GET['page'];
                         switch ($page) {
-                            case 'mahasiswa':
-                                include "page/mahasiswa/mahasiswa.php";
+                            case 'anggaran':
+                                include "page/anggaran/anggaran.php";
                                 break;
                          
                             case 'pegawai':
