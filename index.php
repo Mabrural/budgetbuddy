@@ -6,7 +6,10 @@ if (!isset($_SESSION["login"])) {
 	exit;
 }
 	
-	include "koneksi.php"
+	include "koneksi.php";
+
+	$kategori = query("SELECT * FROM kategori");
+	$anggaran = query("SELECT * FROM anggaran");
 
  ?>
 
@@ -241,7 +244,7 @@ if (!isset($_SESSION["login"])) {
 	  </div>
 	</div>
 </form>
-<!--Tambah Mahasiswa dengan modals -->
+<!--Tambah Anggaran dengan modals -->
 
 <!--Tambah Tagihan dengan modals -->
 <form action="?form=tambahTagihan" method="post">
@@ -283,35 +286,58 @@ if (!isset($_SESSION["login"])) {
 	  </div>
 	</div>
 </form>
-<!--Tambah Dosen dengan modals -->
+<!--Tambah Tagihan dengan modals -->
 
-<!--Tambah Pegawai dengan modals -->
-<form action="?form=tambahPegawai" method="post">
-	 <div class="modal fade" id="tambahPegawai" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--Tambah Pencatatan Pengeluaran dengan modals -->
+<form action="?form=tambahCatatan" method="post">
+	 <div class="modal fade" id="tambahCatatan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pegawai</h1>
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pencatatan Pengeluaran</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
 	        
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<label >NIK</label>
-					<input type="text" name="nik" class="form-control" id="nik" required>
+					<label >Tanggal Catatan</label>
+					<input type="date" name="tgl_catatan" class="form-control" id="tgl_catatan" required>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<label >Nama</label>
-					<input type="text" name="nama" class="form-control" id="nama" required>
+					<label >Nominal</label>
+					<input type="text" name="nominal" class="form-control" id="nominal" required>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<label >Bagian</label>
-					<input type="text" name="bagian" class="form-control" id="bagian" required>
+					<label >Anggaran</label>
+					<!-- <input type="text" name="bagian" class="form-control" id="bagian" required> -->
+					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
+						<option value="">--Pilih--</option>
+						<?php foreach($anggaran as $row) : ?>
+                        <option value="1"><?= $row['nama_anggaran']; ?></option>
+                        <?php endforeach;?>
+					</select>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label >Kategori</label>
+					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
+						<option value="">--Pilih--</option>
+						<?php foreach($kategori as $row) : ?>
+                        <option value="1"><?= $row['nama_kategori']; ?></option>
+                        <?php endforeach;?>
+					</select>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label >Keterangan</label>
+					<input type="text" name="keterangan" class="form-control" id="keterangan" required>
 				</div>
 			</div>
 			<br>
@@ -325,7 +351,7 @@ if (!isset($_SESSION["login"])) {
 	  </div>
 	</div>
 </form>
-<!--Tambah Pegawai dengan modals -->
+<!--Tambah Pencatatan Pengeluaran dengan modals -->
 
 <!--Tambah Jadwal dengan modals -->
 <form action="?form=tambahJadwal" method="post">
