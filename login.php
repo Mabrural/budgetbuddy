@@ -8,7 +8,7 @@ if (isset($_SESSION["login"])) {
 	exit;
 }
 
-require 'functions.php';
+require 'koneksi.php';
 
 if (isset($_POST['login'])) {
 	
@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
 	$username = $_POST["username"];
 	$password = $_POST["password"];
 
-	$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+	$result = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
 
 	// cek username
 	if (mysqli_num_rows($result) === 1 ) {

@@ -1,71 +1,133 @@
-<?php 
-
-$anggaran = query("SELECT * FROM anggaran ORDER BY id_anggaran ASC");
-
-?>
 
 
-        <div class="card-container mt-2 p-5 bg-body rounded">
-        <h4 class="text-center"><strong>Data Anggaran</strong></h4>
-				<hr>
-				
-				<a href="tambah.php"><button class="btn btn-success btn-sm"><i class="fas fa-plus fa-sm"></i> Tambah</button></a>
-        <br>
-				<div class="card-body tab table-responsive" style="height: 500px;">
-					<table class="table table-hover table-responsive overflow-scroll">
-					  <thead>
-						<tr>
-						  <th scope="col">No</th>
-						  <th scope="col">Nama Anggaran</th>
-						  <th scope="col">Nominal</th>
-						  <th scope="col">Tanggal Mulai</th>
-						  <th scope="col">Tanggal Selesai</th>
-						  <th scope="col">Aksi</th>
-						  <th scope="col">Aksi</th>
-						</tr>
-					  </thead>
-					  <tbody>
+<div class="col-md-12 col-lg-12 ">
+	<div class="table table-responsive">
+			<a href="?page=tambahAnggaran" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahAnggaran"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
+			<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search">
+	        	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+	       		<button class="btn btn-outline-dark" type="submit">Search</button>
+	    	</form>
+			<br>
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th scope="col">No</th>
+						<th scope="col">Nama Anggaran</th>
+						<th scope="col">Nominal</th>
+						<th scope="col">Tanggal Mulai</th>
+						<th scope="col">Tanggal Selesai</th>
+						<th colspan="3" scope="col">Aksi</th>
+					</tr>
+				</thead>
 
-          <?php $i = 1; ?>
-          <?php foreach($anggaran as $row) : ?>
-            
-						<tr>
-						  <td><?= $i ;?></td>
-						  <td><?= $row["nama_anggaran"]; ?></td>
-						  <td><?= $row["nominal"]; ?></td>
-						  <td><?= $row["tgl_mulai"]; ?></td>
-						  <td><?= $row["tgl_akhir"]; ?></td>
-						  <td><a href="ubah.php?id_anggaran=<?= $row["id_anggaran"];?>"><button class="btn btn-warning btn-sm"><i class="fas fa-edit fa-sm"></i> Ubah</button></a></td>
-						  <td><a href="hapus.php?id_anggaran=<?= $row["id_anggaran"]; ?>" onclick="return confirm('yakin?');"><button class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i> Hapus</button></a></td>
-						</tr>
-            <?php $i++ ;?>
-          <?php endforeach;?>
-  
-					  </tbody>
-					</table>
-          <nav aria-label="Page navigation example" style="margin-left: 170px;">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+				<?php 
+
+						$query = mysqli_query($koneksi, "SELECT * FROM anggaran");
+						$no = 1;
+						while($data = mysqli_fetch_assoc($query)) {
+
+				?>
+				<tr>
+					<td><?= $no++; ?></td>
+					<td><?= $data['nama_anggaran']; ?></td>
+					<td><?= $data['nominal']; ?></td>
+					<td><?= $data['tgl_mulai']; ?></td>
+					<td><?= $data['tgl_akhir']; ?></td>
+					<td>
+						<i class="fas fa-edit bg-warning p-2 text-white rounded"></i>
+						<a href="?page=ubahAnggaran&id_anggaran=<?= $data['id_anggaran'];?>" data-bs-toggle="modal" data-bs-target="#ubahAnggaran<?= $no; ?>">Edit</a>
+						<i class="fas fa-trash-alt bg-danger p-2 text-white rounded"></i>
+						<a href="?form=hapusAnggaran&id_anggaran=<?= $data['id_anggaran'];?>" data-bs-toggle="modal" data-bs-target="#hapusAnggaran<?= $no; ?>">Delete</a>
+					</td>
+				</tr>
+
+<!-- Ubah dengan Modals -->
+<form action="index.php?form=ubahAnggaran" method="post">
+	<div class="modal fade" id="ubahAnggaran<?= $no; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Data Anggaran</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        
+			<div class="form-row">
+				<input type="hidden" name="aksi" value="ubah">
+				<input type="hidden" name="id_anggaran" value="<?= $data["id_anggaran"];?>">
+				<div class="form-group col-md-12">
+					<label >Nama Anggaran</label>
+					<input type="text" name="nama_anggaran" class="form-control" id="nama_anggaran" value="<?= $data["nama_anggaran"];?>">
 				</div>
-        <br><br>
-             
-        </div><br><br>
-     
-      
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label >Nominal</label>
+					<input type="text" name="nominal" class="form-control" id="nominal" value="<?= $data["nominal"];?>" required>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label >Tanggal Mulai</label>
+					<input type="date" name="tgl_mulai" class="form-control" id="tgl_mulai" value="<?= $data["tgl_mulai"];?>" required>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label >Tanggal Selesai</label>
+					<input type="date" name="tgl_akhir" class="form-control" id="tgl_akhir" value="<?= $data["tgl_akhir"];?>" required>
+				</div>
+			</div>
+			<br>
+		
+	      </div>
+	      <div class="modal-footer">
+	        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="submit">Ubah</button>
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+	      </div>
+	    </div>
+	</div>
+	</div>
+</form>
+<!-- Ubah dengan Modals -->
+
+<!-- hapus dengan modals -->
+<form action="index.php?form=hapusAnggaran" method="post">
+	 <div class="modal fade" id="hapusAnggaran<?= $no; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus Data</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body" align="center">
+
+	        <h5 align="center">Apakah anda yakin ingin menghapus? </h5>
+	        <input type="hidden" name="id_anggaran" value="<?= $data['id_anggaran'] ?>">
+	        <span class="text-danger"><?= $data['nama_anggaran']?> - <?= $data['nominal']?></span><br><br>
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Tidak</button>
+	        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="submit"><i class="fa-solid fa-check"></i> Yakin</button>
+	        
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+</form>
+<!-- hapus dengan modlas -->
+
+				<?php 
+					}
+				 ?>
+			</table>
+	</div>
+</div>
 
 
-     
+
+
+
+
+
+
+

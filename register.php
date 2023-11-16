@@ -1,5 +1,5 @@
 <?php 
-require 'functions.php';
+require 'koneksi.php';
 
 if (isset($_POST['register']) ) {
 	
@@ -15,7 +15,7 @@ if (isset($_POST['register']) ) {
 		";  
 
 	} else {
-		echo mysqli_error($conn);
+		echo mysqli_error($koneksi);
 	}
 
 }

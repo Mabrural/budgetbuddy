@@ -1,30 +1,34 @@
 
-     
-    <div class="card-container mt-2 p-5 bg-body-tertiary rounded">
-        <div id="carouselExample" class="carousel slide offset-lg-0">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-            <img src="img/picture1.jpg" class="d-block w-100">
-            </div>
-            <div class="carousel-item">
-            <img src="img/picture2.jpg" class="d-block w-100">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-        </div>
-        <br>
-        <h1>Budget Buddy</h1>
-        <p>Budget Buddy adalah sebuah aplikasi berbasis website yang dibuat untuk membantu individu dan keluarga mengelola keuangannya dengan lebih baik. 
-        Pengelolaan keuangan yang baik dapat membantu pengguna untuk melacak pengeluaran secara akurat.</p>
 
-        <p>Saat ini, masih banyak individu dan keluarga yang belum memiliki sistem untuk mengelola keuangannya. Akibatnya, mereka sering mengalami kesulitan untuk melacak pengeluaran dan melihat laporan keuangannya. Sistem aplikasi berbasis website Budget Buddy diharapkan dapat menjadi solusi untuk mengatasi masalah tersebut. 
-        Sistem ini menawarkan fitur-fitur yang mudah digunakan dan dapat membantu pengguna untuk mengelola keuangannya dengan lebih baik.
-        </p>
+    <div class="card-body">
+        <h2>Halaman Utama</h2>
+        <p>Budget Buddy adalah sebuah aplikasi berbasis website yang dibuat untuk membantu individu dan keluarga mengelola keuangannya dengan lebih baik. Pengelolaan keuangan yang baik dapat membantu pengguna untuk melacak pengeluaran secara akurat.</p>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 mr-2 mb-2">
+                <div class="card pt-5 pb-5 bg-secondary">
+                    <center><span class="text-white"> <i class="fas fa-sitemap fa-xl" align-item="center"></i> Anggaran</span></center>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mr-2 mb-2">
+                <div class="card pt-5 pb-5 bg-primary">
+                    <center><span class="text-white"><i class="fas fa-money-bill-wave fa-xl" align-item="center"></i> Tagihan</span></center>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mr-2 mb-2">
+                <div class="card pt-5 pb-5 bg-danger">
+                    <center><span class="text-white"><i class="fas fa-pen fa-xl" align-item="center"></i> Pencatatan Pengeluaran</span></center>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mr-2 mb-2">
+                <div class="card pt-5 pb-5 bg-dark">
+                    <center><span class="text-white"><i class="fas fa-solid fa-chart-bar fa-xl" align-item="center"></i> Laporan Keuangan</span></center>
+                </div>
+            </div>
+    <br><br><br>
+
+        </div>
     </div>
+
+    <br><br><br>
