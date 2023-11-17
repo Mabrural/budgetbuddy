@@ -3,9 +3,9 @@
 <div class="col-md-12 col-lg-12 ">
 	<div class="table table-responsive">
 			<a href="?page=tambahCatatan" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahCatatan"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
-			<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search">
-	        	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	       		<button class="btn btn-outline-dark" type="submit">Search</button>
+			<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="" method="post">
+	        	<input class="form-control me-2" type="search" placeholder="Pencarian" aria-label="Search" name="keyword">
+	       		<button class="btn btn-outline-dark bg-dark" type="submit" name="cari"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
 	    	</form>
 			<br>
 			<table class="table table-striped table-bordered table-hover">

@@ -247,4 +247,15 @@ function registrasi($data){
 	return mysqli_affected_rows($koneksi);
 }
 
+function cari($keyword){
+	$query1 = "SELECT * FROM anggaran
+				WHERE
+			  nama_anggaran LIKE '%$keyword%' OR 
+			  nominal LIKE '%$keyword%' OR 
+			  tgl_mulai LIKE '%$keyword%' OR
+			  tgl_akhir LIKE '%$keyword%'
+			";
+
+	return query($query1);
+}
  ?>
