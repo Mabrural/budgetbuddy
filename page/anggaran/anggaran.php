@@ -1,9 +1,3 @@
-<?php
-	// tombol cari ditekan
-if (isset($_POST['cari'])){
-	$query = cari($_POST["keyword"]);
-}
-?>
 
 <div class="col-md-12 col-lg-12 ">
 	<div class="table table-responsive">

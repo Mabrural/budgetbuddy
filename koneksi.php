@@ -207,7 +207,7 @@ function ubahJadwal($data) {
 function registrasi($data){
 	global $koneksi;
 
-    $nama = stripcslashes($data["nama_user"]);
+    $nama = stripcslashes($data["nama_mhs"]);
 	$username = strtolower(stripcslashes($data["username"]));
 	$password = mysqli_real_escape_string($koneksi, $data["password"]);
     $password2 = mysqli_real_escape_string($koneksi, $data["password2"]);
@@ -217,7 +217,7 @@ function registrasi($data){
 	
 
 	// cek username sudah ada atau belum
-	$result = mysqli_query($koneksi, "SELECT username FROM user WHERE username= '$username'");
+	$result = mysqli_query($koneksi, "SELECT username FROM mahasiswa WHERE username= '$username'");
 	if (mysqli_fetch_assoc($result)) {
 		echo "
 			<script>
@@ -242,7 +242,7 @@ function registrasi($data){
 
 
 	// tambahkan user baru ke database
-	mysqli_query($koneksi, "INSERT INTO user VALUES('','$nama', '$username', '$password', '$no_hp', '$alamat', '$email')");
+	mysqli_query($koneksi, "INSERT INTO mahasiswa VALUES('','$nama', '$username', '$password', '$no_hp', '$alamat', '$email')");
 
 	return mysqli_affected_rows($koneksi);
 }
