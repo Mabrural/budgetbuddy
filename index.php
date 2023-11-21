@@ -25,8 +25,13 @@ if (!isset($_SESSION["login"])) {
     <link rel="stylesheet" type="text/css" href="font-awesome/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
 </head>
 <body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+
 	<!-- bootstrap js repository offline -->
     <script src="js/bootstrap.bundle.min.js"></script>
 
@@ -37,7 +42,7 @@ if (!isset($_SESSION["login"])) {
 	
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark fixed-top shadow-sm ">
   <div class="container col-md-12 ml-0 ">
-    <a class="navbar-brand" href="#">BUDGET BUDDY</a>
+    <a class="navbar-brand" href="#" style="font-family: Sans Serif, 'Open Sans';">BUDGET BUDDY</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -50,7 +55,7 @@ if (!isset($_SESSION["login"])) {
             <i class="fas fa-regular fa-circle-user fa-lg"></i> Saya
           </a>
           <ul class="dropdown-menu bg-light">
-          	<li><a class="dropdown-item text-black" href="#"> Username</a></li>
+          	<li><a class="dropdown-item text-black" href="#"> username</a></li>
             <li><a class="dropdown-item text-black" href="?page=profil"><i class="fas fa-user-pen fa-sm"></i> Profil</a></li>
             <li><a class="dropdown-item text-black" href="logout.php"><i class="fas fa-right-to-bracket"></i> Keluar</a></li>
           </ul>

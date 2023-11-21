@@ -111,8 +111,8 @@
 <!-- Ubah dengan Modals -->
 
 <!-- hapus dengan modals -->
-<form action="index.php?form=hapusAnggaran" method="post">
-	 <div class="modal fade" id="hapusAnggaran<?= $no; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<form action="index.php?form=hapusCatatan" method="post">
+	 <div class="modal fade" id="hapusCatatan<?= $no; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -122,8 +122,8 @@
 	      <div class="modal-body" align="center">
 
 	        <h5 align="center">Apakah anda yakin ingin menghapus? </h5>
-	        <input type="hidden" name="id_anggaran" value="<?= $data['id_anggaran'] ?>">
-	        <span class="text-danger"><?= $data['nama_anggaran']?> - <?= $data['nama_anggaran']?></span><br><br>
+	        <input type="hidden" name="id_catatan" value="<?= $data['id_catatan'] ?>">
+	        <span class="text-danger"><?= $data['tgl_catatan']?> - <?= $data['nominal']?> - <?= $data['nama_anggaran']?></span><br><br>
 	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Tidak</button>
 	        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="submit"><i class="fa-solid fa-check"></i> Yakin</button>
 	        

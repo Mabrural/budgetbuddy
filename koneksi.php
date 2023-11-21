@@ -123,21 +123,21 @@ function tambahCatatan($data) {
 	// $anggaran = query("SELECT * FROM anggaran");
 	$tgl_catatan = htmlspecialchars($data["tgl_catatan"]);
 	$nominal = htmlspecialchars($data["nominal"]);
-	$nama_anggaran = htmlspecialchars($data["id_anggaran"]);
-	$nama_kategori = htmlspecialchars($data["id_kategori"]);
+	$id_anggaran = htmlspecialchars($data["id_anggaran"]);
+	$id_kategori = htmlspecialchars($data["id_kategori"]);
 	$keterangan = htmlspecialchars($data["keterangan"]);
 
 
 	$query = "INSERT INTO catatan_pengeluaran VALUES
-			('', '$tgl_catatan', '$nominal', '$nama_anggaran', '$nama_kategori', '$keterangan')";
+			('', '$tgl_catatan', '$nominal', '$id_anggaran', '$id_kategori', '$keterangan', ORDER BY id_mhs='$id_mhs')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
 }
 
-function hapusPegawai($nik) {
+function hapusCatatan($id_catatan) {
 	global $koneksi;
-	mysqli_query($koneksi, "DELETE FROM pegawai WHERE nik=$nik");
+	mysqli_query($koneksi, "DELETE FROM catatan_pengeluaran WHERE id_catatan=$id_catatan");
 
 	return mysqli_affected_rows($koneksi);
 

@@ -26,13 +26,12 @@ if (isset($_POST['login'])) {
 		if  (password_verify($password, $row["password"])){
 			// set session
 			$_SESSION["login"] = true;
-            
+
             echo 
             "<script>
                 alert('Login berhasil!');
                 document.location.href = 'index.php';
             </script>";
-			// header("Location: index.php");
 			exit;
 		}
 	}
@@ -53,6 +52,8 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="font-awesome/css/all.min.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
+
     <!-- untuk repository online -->
 	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
     
@@ -61,6 +62,11 @@ if (isset($_POST['login'])) {
 <body class="login">
     <!-- bootstrap js repository offline -->
     <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!--sweet alert js -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
 
     <div class="global-container mx-auto">
         <div class="card login-form">
@@ -94,6 +100,8 @@ if (isset($_POST['login'])) {
            
         </div><br><br>
 
+
+        
     </div>
     <br><br><br>
 </body>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2023 at 04:37 PM
+-- Generation Time: Nov 19, 2023 at 07:24 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,15 +32,17 @@ CREATE TABLE `anggaran` (
   `nama_anggaran` varchar(100) NOT NULL,
   `nominal` int(11) NOT NULL,
   `tgl_mulai` date NOT NULL,
-  `tgl_akhir` date NOT NULL
+  `tgl_akhir` date NOT NULL,
+  `id_mhs` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `anggaran`
 --
 
-INSERT INTO `anggaran` (`id_anggaran`, `nama_anggaran`, `nominal`, `tgl_mulai`, `tgl_akhir`) VALUES
-(28, 'November 2023', 1000000, '2023-11-09', '2023-11-23');
+INSERT INTO `anggaran` (`id_anggaran`, `nama_anggaran`, `nominal`, `tgl_mulai`, `tgl_akhir`, `id_mhs`) VALUES
+(31, 'November 2023', 4500000, '2023-11-01', '2023-11-30', 36),
+(32, 'Desember 2023', 4000000, '2023-12-01', '2023-12-31', 37);
 
 -- --------------------------------------------------------
 
@@ -55,15 +57,16 @@ CREATE TABLE `catatan_pengeluaran` (
   `tgl_catatan` date NOT NULL,
   `nominal` int(11) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_mhs` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `catatan_pengeluaran`
 --
 
-INSERT INTO `catatan_pengeluaran` (`id_catatan`, `id_kategori`, `id_anggaran`, `tgl_catatan`, `nominal`, `keterangan`, `id_user`) VALUES
-(6, 3, 28, '2023-11-16', 10000, 'makann', 24);
+INSERT INTO `catatan_pengeluaran` (`id_catatan`, `id_kategori`, `id_anggaran`, `tgl_catatan`, `nominal`, `keterangan`, `id_mhs`) VALUES
+(11, 3, 31, '2023-11-19', 20000, 'nasi padang', 36),
+(12, 4, 32, '2023-11-19', 30000, 'bensin', 37);
 
 -- --------------------------------------------------------
 
@@ -82,7 +85,38 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 (3, 'Makanan'),
-(4, 'Transportasi');
+(4, 'Transportasi'),
+(6, 'Pendidikan'),
+(7, 'Kesehatan'),
+(8, 'Asuransi'),
+(9, 'Olahraga'),
+(10, 'Hiburan'),
+(11, 'Belanja'),
+(12, 'Lainnya');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mahasiswa`
+--
+
+CREATE TABLE `mahasiswa` (
+  `id_mhs` int(11) NOT NULL,
+  `nama_mhs` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `no_hp` varchar(15) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `mahasiswa`
+--
+
+INSERT INTO `mahasiswa` (`id_mhs`, `nama_mhs`, `username`, `password`, `no_hp`, `alamat`, `email`) VALUES
+(36, 'Rizky Nurfadilah', 'kiki_dila', 'Kikicantik123', '081209891212', 'Nongsa', 'Kiki12@gmail.com'),
+(37, 'Rudi Setiawan', 'setiawan', 'Rud090912', '087788990000', 'Nongsa', 'Rudi01@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -94,53 +128,17 @@ CREATE TABLE `tagihan` (
   `id_tagihan` int(11) NOT NULL,
   `nama_tagihan` varchar(100) NOT NULL,
   `nominal` int(11) NOT NULL,
-  `tgl_due` date NOT NULL
+  `tgl_due` date NOT NULL,
+  `id_mhs` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tagihan`
 --
 
-INSERT INTO `tagihan` (`id_tagihan`, `nama_tagihan`, `nominal`, `tgl_due`) VALUES
-(1, 'wifi ', 300000, '2023-12-05'),
-(12, 'air', 98000, '2023-11-17');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
-  `nama_user` varchar(100) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `no_hp` int(15) NOT NULL,
-  `alamat` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id_user`, `nama_user`, `username`, `password`, `no_hp`, `alamat`, `email`) VALUES
-(19, 'asdas', 'asda', '$2y$10$a4O50oliq8IgeEXMcj.g2us8IqxSN7wgcXNpIu6YptbjsyFUhrT/i', 1231231, 'asda', 'mabruralmutaqi@gmail.com'),
-(20, 'qwe', 'qwe', '$2y$10$VmO3sqtlfGukDFavC6qG8.7OXXOipSVBGc95Yz.pzaNNuoTUk7TZu', 1231231, 'batam', 'mabruralmutaqi@gmail.com'),
-(21, 'Mabrur', 'mabrur123', '$2y$10$Dvvjpfsx4HwHGVm1zZYiLulfRroMlsfWqsX.lkdQc.quxLgvpcFsy', 2147483647, 'Sekupang', 'mabruralmutaqi@gmail.com'),
-(22, 'Shahrizal', 'rizal26', '$2y$10$0553Wp1.PXyXj8SSy0OTC.gpmFcp9ZvrDTy9WcSdenq0C7UdS1pvK', 2147483647, 'Taman Sari', 'shahrizal71531@gmail.com'),
-(23, 'Rizqi Fadhila', 'kix', '$2y$10$4lueUGqP2CyIfgeTxUhX9ef2.oXYwdstN75zSgBD14VGfps7fFF/2', 2147483647, 'Belian', 'rizqi.4342311004@students.polibatam.ac.id'),
-(24, 'admin', 'admin', '$2y$10$vh0/ZLrKrHSms1dGrYF0buM1QQe3aYBjsFcwq8qjiyMFVIByGU7L.', 2147483647, 'kokslhfkhsk', '2shkjdhfkshkhdf@gmail.com'),
-(25, '234234', '23423423', '$2y$10$nEeJYejhFxsJeTUjp/kv/.IcSdKwJ/tlHjcEIYUHtAVfRDRaj3HQ2', 123123123, '1231231', '2231231231@GMAIL.COM'),
-(26, 'zxc', 'zxc', '$2y$10$59/tvkbvw73gSRhn56lizO3wlBYxYZrbzyaWFey/W6Wl3wc6Q4vne', 21312, 'zxczxc', 'das@gmail.com'),
-(27, 'kiki', 'kiki11', '$2y$10$WuiUfnDhixksteMRJxTjk.TxZhc5DsjjbsfIO9iT8RerAJi1Y7pk2', 1231231, 'asda', 'mabruralmutaqi@gmail.com'),
-(28, 'qqq', 'qqq', '$2y$10$jM4GjqodeE7ExfJejAmAoeq3vgWxUYJe9GZApJs/RD86St7zpZ5uW', 1231231, 'batam', 'mabruralmutaqi@gmail.com'),
-(29, 'aska', 'aska', '$2y$10$yOXgMfpFJoKdkUbAwww7zuu8vR2NWtgljBKORHTJxpYKUXRw85MZW', 1321323, 'sekupang', 'mabruralmutaqi@gmail.com'),
-(30, 'azx', 'azx', '$2y$10$7dmpnMBpJL6QP.dhafe7ju.r7G9ssM/2qxChWclLDXFHW.OhjKv1m', 1231231, 'Sekupang', 'mabruralmutaqi@gmail.com'),
-(31, 'zzz', 'zzz', '$2y$10$zPScH4ySXuqkqU81G5JIKOEFF4YtSdVW9WU9lKiHC3yvpw4jHTIta', 2147483647, 'Sekupang', 'mabruralmutaqi@gmail.com'),
-(32, 'nnn', 'nnn', '$2y$10$KWUZNbCdTHn.oHj1oMV3POeaVUW46Mu0xwMKZ0P60BClVy.fH8B6e', 2147483647, 'Sekupang', 'mabruralmutaqi@gmail.com'),
-(33, 'www', 'www', '$2y$10$FUQke6uDlzMJe3NikKf94uIN8VumQoDn0LJQJoBQn3VuEo8v/.XLq', 2147483647, 'Batam Center', 'mabruralmutaqi@gmail.com');
+INSERT INTO `tagihan` (`id_tagihan`, `nama_tagihan`, `nominal`, `tgl_due`, `id_mhs`) VALUES
+(15, 'Wifi', 300000, '2023-12-01', 36),
+(16, 'Air', 40000, '2023-12-20', 37);
 
 --
 -- Indexes for dumped tables
@@ -150,7 +148,8 @@ INSERT INTO `user` (`id_user`, `nama_user`, `username`, `password`, `no_hp`, `al
 -- Indexes for table `anggaran`
 --
 ALTER TABLE `anggaran`
-  ADD PRIMARY KEY (`id_anggaran`);
+  ADD PRIMARY KEY (`id_anggaran`),
+  ADD KEY `id_mhs` (`id_mhs`);
 
 --
 -- Indexes for table `catatan_pengeluaran`
@@ -158,7 +157,7 @@ ALTER TABLE `anggaran`
 ALTER TABLE `catatan_pengeluaran`
   ADD PRIMARY KEY (`id_catatan`),
   ADD KEY `id_anggaran` (`id_anggaran`),
-  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_user` (`id_mhs`),
   ADD KEY `catatan_pengeluaran_ibfk_3` (`id_kategori`);
 
 --
@@ -168,16 +167,17 @@ ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
+-- Indexes for table `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  ADD PRIMARY KEY (`id_mhs`);
+
+--
 -- Indexes for table `tagihan`
 --
 ALTER TABLE `tagihan`
-  ADD PRIMARY KEY (`id_tagihan`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_tagihan`),
+  ADD KEY `id_mhs` (`id_mhs`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -187,35 +187,41 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `anggaran`
 --
 ALTER TABLE `anggaran`
-  MODIFY `id_anggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_anggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `catatan_pengeluaran`
 --
 ALTER TABLE `catatan_pengeluaran`
-  MODIFY `id_catatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_catatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  MODIFY `id_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tagihan`
 --
 ALTER TABLE `tagihan`
-  MODIFY `id_tagihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_tagihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `anggaran`
+--
+ALTER TABLE `anggaran`
+  ADD CONSTRAINT `anggaran_ibfk_1` FOREIGN KEY (`id_mhs`) REFERENCES `mahasiswa` (`id_mhs`);
 
 --
 -- Constraints for table `catatan_pengeluaran`
@@ -223,7 +229,13 @@ ALTER TABLE `user`
 ALTER TABLE `catatan_pengeluaran`
   ADD CONSTRAINT `catatan_pengeluaran_ibfk_2` FOREIGN KEY (`id_anggaran`) REFERENCES `anggaran` (`id_anggaran`),
   ADD CONSTRAINT `catatan_pengeluaran_ibfk_3` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`),
-  ADD CONSTRAINT `catatan_pengeluaran_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `catatan_pengeluaran_ibfk_4` FOREIGN KEY (`id_mhs`) REFERENCES `mahasiswa` (`id_mhs`);
+
+--
+-- Constraints for table `tagihan`
+--
+ALTER TABLE `tagihan`
+  ADD CONSTRAINT `tagihan_ibfk_1` FOREIGN KEY (`id_mhs`) REFERENCES `mahasiswa` (`id_mhs`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
