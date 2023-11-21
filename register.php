@@ -51,7 +51,7 @@ if (isset($_POST['register']) ) {
             <form action="" method="post">
             <div class="card-text">
             <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="nama" name="nama_user" placeholder="" required>
+                <input type="text" class="form-control" id="nama" name="nama_mhs" placeholder="" required>
                 <label for="nama">Nama Lengkap</label>
             </div>
             <div class="form-floating mb-2">

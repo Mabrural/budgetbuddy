@@ -315,7 +315,7 @@ if (!isset($_SESSION["login"])) {
 				<div class="form-group col-md-12">
 					<label >Anggaran</label>
 					<!-- <input type="text" name="bagian" class="form-control" id="bagian" required> -->
-					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
+					<select class="form-select" aria-label="Default select example" name="id_anggaran" id="id_anggaran">
 						<option value="">--Pilih--</option>
 						<?php foreach($anggaran as $row) : ?>
                         <option value="1"><?= $row['nama_anggaran']; ?></option>
@@ -326,7 +326,7 @@ if (!isset($_SESSION["login"])) {
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label >Kategori</label>
-					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
+					<select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
 						<option value="">--Pilih--</option>
 						<?php foreach($kategori as $row) : ?>
                         <option value="1"><?= $row['nama_kategori']; ?></option>

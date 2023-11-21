@@ -34,9 +34,9 @@
 					<td><?= $data['tgl_akhir']; ?></td>
 					<td>
 						<i class="fas fa-edit bg-warning p-2 text-white rounded"></i>
-						<a href="?page=ubahAnggaran&id_anggaran=<?= $data['id_anggaran'];?>" data-bs-toggle="modal" data-bs-target="#ubahAnggaran<?= $no; ?>">Edit</a>
+						<a href="?page=ubahAnggaran&id_anggaran=<?= $data['id_anggaran'];?>" data-bs-toggle="modal" data-bs-target="#ubahAnggaran<?= $no; ?>">Ubah</a>
 						<i class="fas fa-trash-alt bg-danger p-2 text-white rounded"></i>
-						<a href="?form=hapusAnggaran&id_anggaran=<?= $data['id_anggaran'];?>" data-bs-toggle="modal" data-bs-target="#hapusAnggaran<?= $no; ?>">Delete</a>
+						<a href="?form=hapusAnggaran&id_anggaran=<?= $data['id_anggaran'];?>" data-bs-toggle="modal" data-bs-target="#hapusAnggaran<?= $no; ?>">Hapus</a>
 					</td>
 				</tr>
 

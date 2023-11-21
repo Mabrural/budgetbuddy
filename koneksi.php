@@ -117,15 +117,19 @@ function ubahTagihan($data) {
 
 }
 
-function tambahPegawai($data) {
+function tambahCatatan($data) {
 	global $koneksi;
-	$nik = htmlspecialchars($data["nik"]);
-	$nama = htmlspecialchars($data["nama"]);
-	$bagian = htmlspecialchars($data["bagian"]);
+	// $kategori = query("SELECT * FROM kategori");
+	// $anggaran = query("SELECT * FROM anggaran");
+	$tgl_catatan = htmlspecialchars($data["tgl_catatan"]);
+	$nominal = htmlspecialchars($data["nominal"]);
+	$nama_anggaran = htmlspecialchars($data["id_anggaran"]);
+	$nama_kategori = htmlspecialchars($data["id_kategori"]);
+	$keterangan = htmlspecialchars($data["keterangan"]);
 
 
-	$query = "INSERT INTO pegawai VALUES
-			('$nik', '$nama', '$bagian')";
+	$query = "INSERT INTO catatan_pengeluaran VALUES
+			('', '$tgl_catatan', '$nominal', '$nama_anggaran', '$nama_kategori', '$keterangan')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);

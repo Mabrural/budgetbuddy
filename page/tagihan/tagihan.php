@@ -33,9 +33,9 @@
 					<td><?= $data['tgl_due']; ?></td>
 					<td>
 						<i class="fas fa-edit bg-warning p-2 text-white rounded"></i>
-						<a href="?page=ubahTagihan&id_tagihan=<?= $data['id_tagihan'];?>" data-bs-toggle="modal" data-bs-target="#ubahTagihan<?= $no; ?>">Edit</a>
+						<a href="?page=ubahTagihan&id_tagihan=<?= $data['id_tagihan'];?>" data-bs-toggle="modal" data-bs-target="#ubahTagihan<?= $no; ?>">Ubah</a>
 						<i class="fas fa-trash-alt bg-danger p-2 text-white rounded"></i>
-						<a href="?form=hapusTagihan&id_tagihan=<?= $data['id_tagihan'];?>" data-bs-toggle="modal" data-bs-target="#hapusTagihan<?= $no; ?>">Delete</a>
+						<a href="?form=hapusTagihan&id_tagihan=<?= $data['id_tagihan'];?>" data-bs-toggle="modal" data-bs-target="#hapusTagihan<?= $no; ?>">Hapus</a>
 					</td>
 				</tr>
 

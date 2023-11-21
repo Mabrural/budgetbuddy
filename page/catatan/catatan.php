@@ -38,9 +38,9 @@
 					<td><?= $data['keterangan']; ?></td>
 					<td>
 						<i class="fas fa-edit bg-warning p-2 text-white rounded"></i>
-						<a href="?page=ubahCatatan&id_catatan=<?= $data['id_catatan'];?>" data-bs-toggle="modal" data-bs-target="#ubahCatatan<?= $no; ?>">Edit</a>
+						<a href="?page=ubahCatatan&id_catatan=<?= $data['id_catatan'];?>" data-bs-toggle="modal" data-bs-target="#ubahCatatan<?= $no; ?>">Ubah</a>
 						<i class="fas fa-trash-alt bg-danger p-2 text-white rounded"></i>
-						<a href="?form=hapusCatatan&id_catatan=<?= $data['id_catatan'];?>" data-bs-toggle="modal" data-bs-target="#hapusCatatan<?= $no; ?>">Delete</a>
+						<a href="?form=hapusCatatan&id_catatan=<?= $data['id_catatan'];?>" data-bs-toggle="modal" data-bs-target="#hapusCatatan<?= $no; ?>">Hapus</a>
 					</td>
 				</tr>
 
@@ -50,17 +50,17 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Data Anggaran</h1>
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Data Catatan Pengeluaran</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
 	        
 			<div class="form-row">
 				<input type="hidden" name="aksi" value="ubah">
-				<input type="hidden" name="id_anggaran_lama" value="<?= $data["id_anggaran"];?>">
+				<input type="hidden" name="id_catatan" value="<?= $data["id_catatan"];?>">
 				<div class="form-group col-md-12">
-					<label >Nama Anggaran</label>
-					<input type="text" name="nama_anggaran" class="form-control" id="nama_anggaran" value="<?= $data["nama_anggaran"];?>">
+					<label >Tanggal Catatan</label>
+					<input type="date" name="nama_anggaran" class="form-control" id="tgl_catatan" value="<?= $data["tgl_catatan"];?>">
 				</div>
 			</div>
 			<div class="form-row">
@@ -71,14 +71,30 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<label >Tanggal Mulai</label>
-					<input type="date" name="tgl_mulai" class="form-control" id="tgl_mulai" value="<?= $data["tgl_mulai"];?>" required>
+					<label >Anggaran</label>
+					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
+						<option value="">--Pilih--</option>
+						<?php foreach($anggaran as $row) : ?>
+                        <option value="1"><?= $row['nama_anggaran']; ?></option>
+                        <?php endforeach;?>
+					</select>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<label >Tanggal Selesai</label>
-					<input type="date" name="tgl_akhir" class="form-control" id="tgl_anggaran" value="<?= $data["tgl_akhir"];?>" required>
+					<label >Kategori</label>
+					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
+						<option value="">--Pilih--</option>
+						<?php foreach($kategori as $row) : ?>
+                        	<option value="1"><?= $row['nama_kategori']; ?></option>
+                        <?php endforeach;?>
+					</select>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label >Keterangan</label>
+					<input type="text" name="keterangan" class="form-control" id="keterangan" value="<?= $data["keterangan"];?>" required>
 				</div>
 			</div>
 			<br>
