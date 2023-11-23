@@ -28,10 +28,11 @@ function tambahAnggaran($data) {
 	$nominal = htmlspecialchars($data["nominal"]);
 	$tgl_mulai = htmlspecialchars($data["tgl_mulai"]);
 	$tgl_akhir = htmlspecialchars($data["tgl_akhir"]);
+	$id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
 
 
 	$query = "INSERT INTO anggaran VALUES
-			('', '$nama_anggaran', '$nominal', '$tgl_mulai', '$tgl_akhir')";
+			('', '$nama_anggaran', '$nominal', '$tgl_mulai', '$tgl_akhir', '$id_mhs')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
@@ -79,10 +80,11 @@ function tambahTagihan($data) {
 	$nama_tagihan = htmlspecialchars($data["nama_tagihan"]);
 	$nominal = htmlspecialchars($data["nominal"]);
 	$tgl_due = htmlspecialchars($data["tgl_due"]);
+	$id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
 
 
 	$query = "INSERT INTO tagihan VALUES
-			('', '$nama_tagihan', '$nominal', '$tgl_due')";
+			('', '$nama_tagihan', '$nominal', '$tgl_due', '$id_mhs')";
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
@@ -121,17 +123,20 @@ function tambahCatatan($data) {
 	global $koneksi;
 	// $kategori = query("SELECT * FROM kategori");
 	// $anggaran = query("SELECT * FROM anggaran");
-	$tgl_catatan = htmlspecialchars($data["tgl_catatan"]);
-	$nominal = htmlspecialchars($data["nominal"]);
-	$id_anggaran = htmlspecialchars($data["id_anggaran"]);
-	$id_kategori = htmlspecialchars($data["id_kategori"]);
-	$keterangan = htmlspecialchars($data["keterangan"]);
+
+	$tgl_catatan = mysqli_real_escape_string($koneksi, $data["tgl_catatan"]);
+	$nominal = mysqli_real_escape_string($koneksi, $data["nominal"]);
+	$id_anggaran = mysqli_real_escape_string($koneksi, $data["id_anggaran"]);
+	$id_kategori = mysqli_real_escape_string($koneksi, $data["id_kategori"]);
+	$keterangan = mysqli_real_escape_string($koneksi, $data["keterangan"]);
+	$id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
 
 
 	$query = "INSERT INTO catatan_pengeluaran VALUES
-			('', '$tgl_catatan', '$nominal', '$id_anggaran', '$id_kategori', '$keterangan', ORDER BY id_mhs='$id_mhs')";
+			('','$id_kategori', '$id_anggaran', '$tgl_catatan', '$nominal', '$keterangan', '$id_mhs')";
 	mysqli_query($koneksi, $query);
-
+	//  var_dump($query);
+	//  die;
 	return mysqli_affected_rows($koneksi);
 }
 

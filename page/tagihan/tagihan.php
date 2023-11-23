@@ -1,4 +1,8 @@
+<?php
 
+$id_mhs = $_SESSION["id_mhs"];
+
+?>
 
 <div class="col-md-12 col-lg-12 ">
 	<div class="table table-responsive">
@@ -21,7 +25,7 @@
 
 				<?php 
 
-						$query = mysqli_query($koneksi, "SELECT * FROM tagihan");
+						$query = mysqli_query($koneksi, "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
 

@@ -13,8 +13,8 @@ require 'koneksi.php';
 if (isset($_POST['login'])) {
 	
 
-	$username = $_POST["username"];
-	$password = $_POST["password"];
+	$username = mysqli_real_escape_string($koneksi, $_POST["username"]);
+	$password = mysqli_real_escape_string($koneksi, $_POST["password"]);
 
 	$result = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE username = '$username'");
 
@@ -27,6 +27,7 @@ if (isset($_POST['login'])) {
 			// set session
 			$_SESSION["login"] = true;
             $_SESSION["username"] = $_POST["username"];
+            $_SESSION["id_mhs"] = $row["id_mhs"];
             echo 
             "<script>
                 alert('Login berhasil!');
@@ -34,6 +35,9 @@ if (isset($_POST['login'])) {
             </script>";
 			exit;
 		}
+        else{
+            $error = true;
+        }
 	}
 
 	$error = true;
@@ -52,7 +56,7 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="font-awesome/css/all.min.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="js/sweetalert2.min.css">
 
     <!-- untuk repository online -->
 	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->

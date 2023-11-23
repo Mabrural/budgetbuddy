@@ -1,4 +1,8 @@
+<?php
 
+$id_mhs = $_SESSION["id_mhs"];
+
+?>
 
 <div class="col-md-12 col-lg-12 ">
 	<div class="table table-responsive">
@@ -23,7 +27,7 @@
 
 				<?php 
 
-						$query = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan");
+						$query = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs");
 						// $query = mysqli_query($koneksi, "SELECT catatan_pengeluaran.tgl_catatan, catatan_pengeluaran.nominal, anggaran.nama_anggaran, kategori.nama_kategori, catatan_pengeluaran.keterangan FROM catatan_pengeluaran JOIN anggaran ON JOIN kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
@@ -75,7 +79,7 @@
 					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
 						<option value="">--Pilih--</option>
 						<?php foreach($anggaran as $row) : ?>
-                        <option value="1"><?= $row['nama_anggaran']; ?></option>
+                        <option value="<?= $row['id_anggaran'];?>" <?= ($row['id_anggaran'] == $data['id_anggaran'])?'selected': ''; ?>><?= $row['nama_anggaran']; ?></option>
                         <?php endforeach;?>
 					</select>
 				</div>
@@ -86,7 +90,7 @@
 					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
 						<option value="">--Pilih--</option>
 						<?php foreach($kategori as $row) : ?>
-                        	<option value="1"><?= $row['nama_kategori']; ?></option>
+                        	<option value="<?= $row['id_kategori'];?>" <?= ($row['id_kategori'] == $data['id_kategori'])?'selected': ''; ?>><?= $row['nama_kategori']; ?></option>
                         <?php endforeach;?>
 					</select>
 				</div>

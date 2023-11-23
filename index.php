@@ -7,8 +7,9 @@ if (!isset($_SESSION["login"])) {
 }
 	
 	include "koneksi.php";
+	$id_mhs = $_SESSION["id_mhs"];
 	$kategori = query("SELECT * FROM kategori");
-	$anggaran = query("SELECT * FROM anggaran");
+	$anggaran = query("SELECT * FROM anggaran WHERE anggaran.id_mhs=$id_mhs");
 
 	$nama = $_SESSION["username"];
 
@@ -32,6 +33,7 @@ if (!isset($_SESSION["login"])) {
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+
 
 	<!-- bootstrap js repository offline -->
     <script src="js/bootstrap.bundle.min.js"></script>
@@ -257,7 +259,7 @@ if (!isset($_SESSION["login"])) {
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Anggaran</h1>
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Tagihan</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
@@ -323,7 +325,7 @@ if (!isset($_SESSION["login"])) {
 					<select class="form-select" aria-label="Default select example" name="id_anggaran" id="id_anggaran">
 						<option value="">--Pilih--</option>
 						<?php foreach($anggaran as $row) : ?>
-                        <option value="1"><?= $row['nama_anggaran']; ?></option>
+                        <option value="<?= $row['id_anggaran'];?>"><?= $row['nama_anggaran']; ?></option>
                         <?php endforeach;?>
 					</select>
 				</div>
@@ -334,7 +336,7 @@ if (!isset($_SESSION["login"])) {
 					<select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
 						<option value="">--Pilih--</option>
 						<?php foreach($kategori as $row) : ?>
-                        <option value="1"><?= $row['nama_kategori']; ?></option>
+                        <option value="<?= $row['id_kategori'];?>"><?= $row['nama_kategori']; ?></option>
                         <?php endforeach;?>
 					</select>
 				</div>

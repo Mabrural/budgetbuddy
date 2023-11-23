@@ -1,4 +1,8 @@
+<?php
 
+$id_mhs = $_SESSION["id_mhs"];
+
+?>
 <div class="col-md-12 col-lg-12 ">
 	<div class="table table-responsive">
 			<a href="?page=tambahAnggaran" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahAnggaran"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
@@ -21,7 +25,7 @@
 
 				<?php 	
 
-						$query = mysqli_query($koneksi, "SELECT * FROM anggaran");
+						$query = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE anggaran.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
 
