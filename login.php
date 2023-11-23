@@ -20,13 +20,13 @@ if (isset($_POST['login'])) {
 
 	// cek username
 	if (mysqli_num_rows($result) === 1 ) {
-
+        
 		//cek password
 		$row = mysqli_fetch_assoc($result);
 		if  (password_verify($password, $row["password"])){
 			// set session
 			$_SESSION["login"] = true;
-
+            $_SESSION["username"] = $_POST["username"];
             echo 
             "<script>
                 alert('Login berhasil!');
@@ -81,6 +81,7 @@ if (isset($_POST['login'])) {
             
             <form action="" method="post">
                 <div class="card-text">
+                    <input type="hidden" name="nama_mhs">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInput" name="username" placeholder="" required>
                         <label for="floatingInput">Username</label>

@@ -19,7 +19,7 @@
 					</tr>
 				</thead>
 
-				<?php 
+				<?php 	
 
 						$query = mysqli_query($koneksi, "SELECT * FROM anggaran");
 						$no = 1;

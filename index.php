@@ -7,9 +7,10 @@ if (!isset($_SESSION["login"])) {
 }
 	
 	include "koneksi.php";
-
 	$kategori = query("SELECT * FROM kategori");
 	$anggaran = query("SELECT * FROM anggaran");
+
+	$nama = $_SESSION["username"];
 
  ?>
 
@@ -42,27 +43,26 @@ if (!isset($_SESSION["login"])) {
 	
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark fixed-top shadow-sm ">
   <div class="container col-md-12 ml-0 ">
-    <a class="navbar-brand" href="#" style="font-family: Sans Serif, 'Open Sans';">BUDGET BUDDY</a>
+    <a class="navbar-brand" href="#" style="font-family: Sans Serif, 'Open Sans'">BUDGET BUDDY</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav navbar-text ms-auto">
-
+			<p class="dropdown-item text-white pt-2">Halo, <?= $nama;?></p>
 	  	<li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-regular fa-circle-user fa-lg"></i> Saya
           </a>
           <ul class="dropdown-menu bg-light">
-          	<li><a class="dropdown-item text-black" href="#"> username</a></li>
             <li><a class="dropdown-item text-black" href="?page=profil"><i class="fas fa-user-pen fa-sm"></i> Profil</a></li>
             <li><a class="dropdown-item text-black" href="logout.php"><i class="fas fa-right-to-bracket"></i> Keluar</a></li>
           </ul>
         </li>
 		<li class="nav-item">
           <a class="nav-link" style="color: white;" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-bell fa-lg"></i></a>
-        </li>
+        </li>	
                 
         <!-- <form class="d-flex" role="search">
 	        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
