@@ -28,12 +28,12 @@ $id_mhs = $_SESSION["id_mhs"];
 						$query = mysqli_query($koneksi, "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
-
+						$nominal = $data['nominal'];
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
 					<td><?= $data['nama_tagihan']; ?></td>
-					<td><?= $data['nominal']; ?></td>
+					<td><?= "Rp. ".number_format("$nominal", 2, ",", "."); ?></td>
 					<td><?= date('d-m-Y', strtotime($data['tgl_due'])); ?></td>
 					<td>
 						<i class="fas fa-edit bg-warning p-2 text-white rounded"></i>

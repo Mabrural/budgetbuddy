@@ -30,12 +30,12 @@ $id_mhs = $_SESSION["id_mhs"];
 						$query = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
-
+							$nominal = $data['nominal'];
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
 					<td><?= date('d-m-Y', strtotime($data['tgl_catatan'])); ?></td>
-					<td><?= $data['nominal']; ?></td>
+					<td><?= "Rp. ".number_format("$nominal", 2, ",", ".") ?></td>
 					<td><?= $data['nama_anggaran']; ?></td>
 					<td><?= $data['nama_kategori']; ?></td>
 					<td><?= $data['keterangan']; ?></td>
