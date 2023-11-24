@@ -24,10 +24,12 @@ $id_mhs = $_SESSION["id_mhs"];
 				</thead>
 
 				<?php 	
-
+						
 						$query = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE anggaran.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
+							$data['tgl_mulai']= date('d-m-Y');
+							$data['tgl_akhir']= date('d-m-Y');
 
 				?>
 				<tr>

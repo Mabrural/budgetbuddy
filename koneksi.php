@@ -121,8 +121,6 @@ function ubahTagihan($data) {
 
 function tambahCatatan($data) {
 	global $koneksi;
-	// $kategori = query("SELECT * FROM kategori");
-	// $anggaran = query("SELECT * FROM anggaran");
 
 	$tgl_catatan = mysqli_real_escape_string($koneksi, $data["tgl_catatan"]);
 	$nominal = mysqli_real_escape_string($koneksi, $data["nominal"]);
@@ -148,19 +146,23 @@ function hapusCatatan($id_catatan) {
 
 }
 
-function ubahPegawai($data) {
+function ubahCatatan($data) {
 	global $koneksi;
 
-	$nik = htmlspecialchars($data["nik"]);
-	$nik_lama = htmlspecialchars($data["nik_lama"]);
-	$nama = htmlspecialchars($data["nama"]);
-	$bagian = htmlspecialchars($data["bagian"]);
+	$tgl_catatan = mysqli_real_escape_string($koneksi, $data["tgl_catatan"]);
+	$nominal = mysqli_real_escape_string($koneksi, $data["nominal"]);
+	$id_anggaran = mysqli_real_escape_string($koneksi, $data["id_anggaran"]);
+	$id_kategori = mysqli_real_escape_string($koneksi, $data["id_kategori"]);
+	$keterangan = mysqli_real_escape_string($koneksi, $data["keterangan"]);
+	$id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
 
-	$query = "UPDATE pegawai SET
-				nik = '$nik',
-				nama= '$nama',
-				bagian = '$bagian'
-			  WHERE nik='$nik_lama'
+	$query = "UPDATE catatan_pengeluaran SET
+				id_kategori = '$id_kategori',
+				id_anggaran= '$id_anggaran',
+				tgl_catatan= '$tgl_catatan',
+				nominal= '$nominal',
+				keterangan = '$keterangan'
+			  WHERE id_catatan='$id_catatan'
 			";
 			
 	mysqli_query($koneksi, $query);

@@ -1,11 +1,5 @@
 <?php 
 
-// ambil data di URL
-// $id_anggaran = $_POST['id_anggaran'];
-
-// query data anggaran berdasarkan nidn
-// $anggaran = query("SELECT * FROM anggaran WHERE id_anggaran = $id_anggaran")[0];
-
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
 	

@@ -28,7 +28,7 @@ $id_mhs = $_SESSION["id_mhs"];
 						$query = mysqli_query($koneksi, "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
-
+							$data['tgl_due']= date('d-m-Y');
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
