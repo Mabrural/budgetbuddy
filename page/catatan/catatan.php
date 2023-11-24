@@ -28,14 +28,13 @@ $id_mhs = $_SESSION["id_mhs"];
 				<?php 
 
 						$query = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs");
-						// $query = mysqli_query($koneksi, "SELECT catatan_pengeluaran.tgl_catatan, catatan_pengeluaran.nominal, anggaran.nama_anggaran, kategori.nama_kategori, catatan_pengeluaran.keterangan FROM catatan_pengeluaran JOIN anggaran ON JOIN kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
-							$data['tgl_catatan']= date('d-m-Y');
+
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
-					<td><?= $data['tgl_catatan']; ?></td>
+					<td><?= date('d-m-Y', strtotime($data['tgl_catatan'])); ?></td>
 					<td><?= $data['nominal']; ?></td>
 					<td><?= $data['nama_anggaran']; ?></td>
 					<td><?= $data['nama_kategori']; ?></td>

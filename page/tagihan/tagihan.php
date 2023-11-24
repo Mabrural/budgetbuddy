@@ -28,13 +28,13 @@ $id_mhs = $_SESSION["id_mhs"];
 						$query = mysqli_query($koneksi, "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
-							$data['tgl_due']= date('d-m-Y');
+
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
 					<td><?= $data['nama_tagihan']; ?></td>
 					<td><?= $data['nominal']; ?></td>
-					<td><?= $data['tgl_due']; ?></td>
+					<td><?= date('d-m-Y', strtotime($data['tgl_due'])); ?></td>
 					<td>
 						<i class="fas fa-edit bg-warning p-2 text-white rounded"></i>
 						<a href="?page=ubahTagihan&id_tagihan=<?= $data['id_tagihan'];?>" data-bs-toggle="modal" data-bs-target="#ubahTagihan<?= $no; ?>">Ubah</a>

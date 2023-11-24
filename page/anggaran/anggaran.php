@@ -28,16 +28,14 @@ $id_mhs = $_SESSION["id_mhs"];
 						$query = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE anggaran.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
-							$data['tgl_mulai']= date('d-m-Y');
-							$data['tgl_akhir']= date('d-m-Y');
 
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
 					<td><?= $data['nama_anggaran']; ?></td>
 					<td><?= $data['nominal']; ?></td>
-					<td><?= $data['tgl_mulai']; ?></td>
-					<td><?= $data['tgl_akhir']; ?></td>
+					<td><?= date('d-m-Y', strtotime($data['tgl_mulai'])); ?></td>
+					<td><?= date('d-m-Y', strtotime($data['tgl_akhir'])); ?></td>
 					<td>
 						<i class="fas fa-edit bg-warning p-2 text-white rounded"></i>
 						<a href="?page=ubahAnggaran&id_anggaran=<?= $data['id_anggaran'];?>" data-bs-toggle="modal" data-bs-target="#ubahAnggaran<?= $no; ?>">Ubah</a>
@@ -74,7 +72,7 @@ $id_mhs = $_SESSION["id_mhs"];
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label >Tanggal Mulai</label>
-					<input type="date" name="tgl_mulai" class="form-control" id="tgl_mulai" value="<?= $data["tgl_mulai"];?>" required>
+					<input type="date" name="tgl_mulai" class="form-control" id="tgl_mulai" value="<?= $data['tgl_mulai'];?>" required>
 				</div>
 			</div>
 			<div class="form-row">
