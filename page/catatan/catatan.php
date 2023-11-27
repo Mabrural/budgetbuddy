@@ -12,6 +12,8 @@ $id_mhs = $_SESSION["id_mhs"];
 	       		<button class="btn btn-outline-dark bg-dark" type="submit" name="cari"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
 	    	</form>
 			<br>
+			<h5 class="text-right" style="float: right;">Total Pengeluaran : 4450000</h5>
+			<br>
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
@@ -30,7 +32,7 @@ $id_mhs = $_SESSION["id_mhs"];
 						$query = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs");
 						$no = 1;
 						while($data = mysqli_fetch_assoc($query)) {
-							$nominal = $data['nominal'];
+							$nominal = $data['nominal_catatan'];
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
@@ -69,7 +71,7 @@ $id_mhs = $_SESSION["id_mhs"];
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label >Nominal</label>
-					<input type="text" name="nominal" class="form-control" id="nominal" value="<?= $data["nominal"];?>" required>
+					<input type="text" name="nominal" class="form-control" id="nominal" value="<?= $data["nominal_catatan"];?>" required>
 				</div>
 			</div>
 			<div class="form-row">
@@ -126,7 +128,7 @@ $id_mhs = $_SESSION["id_mhs"];
 
 	        <h5 align="center">Apakah anda yakin ingin menghapus? </h5>
 	        <input type="hidden" name="id_catatan" value="<?= $data['id_catatan'] ?>">
-	        <span class="text-danger"><?= $data['tgl_catatan']?> - <?= $data['nominal']?> - <?= $data['nama_anggaran']?></span><br><br>
+	        <span class="text-danger"><?= date('d-m-Y', strtotime($data['tgl_catatan']));?> - <?= "Rp. ".number_format("$nominal", 2, ",", ".")?> - <?= $data['keterangan']?></span><br><br>
 	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Tidak</button>
 	        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="submit"><i class="fa-solid fa-check"></i> Yakin</button>
 	        

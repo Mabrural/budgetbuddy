@@ -107,7 +107,7 @@ $id_mhs = $_SESSION["id_mhs"];
 
 	        <h5 align="center">Apakah anda yakin ingin menghapus? </h5>
 	        <input type="hidden" name="id_anggaran" value="<?= $data['id_anggaran'] ?>">
-	        <span class="text-danger"><?= $data['nama_anggaran']?> - <?= $data['nominal']?></span><br><br>
+	        <span class="text-danger"><?= $data['nama_anggaran']?> - <?= "Rp. ".number_format("$nominal", 2, ",", ".");?></span><br><br>
 	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Tidak</button>
 	        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="submit"><i class="fa-solid fa-check"></i> Yakin</button>
 	        
