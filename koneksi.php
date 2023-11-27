@@ -150,7 +150,7 @@ function ubahCatatan($data) {
 	global $koneksi;
 
 	$tgl_catatan = mysqli_real_escape_string($koneksi, $data["tgl_catatan"]);
-	$nominal = mysqli_real_escape_string($koneksi, $data["nominal"]);
+	$nominal = mysqli_real_escape_string($koneksi, $data["nominal_catatan"]);
 	$id_anggaran = mysqli_real_escape_string($koneksi, $data["id_anggaran"]);
 	$id_kategori = mysqli_real_escape_string($koneksi, $data["id_kategori"]);
 	$keterangan = mysqli_real_escape_string($koneksi, $data["keterangan"]);
@@ -160,7 +160,7 @@ function ubahCatatan($data) {
 				id_kategori = '$id_kategori',
 				id_anggaran= '$id_anggaran',
 				tgl_catatan= '$tgl_catatan',
-				nominal= '$nominal',
+				nominal_catatan= '$nominal',
 				keterangan = '$keterangan'
 			  WHERE id_catatan='$id_catatan'
 			";
