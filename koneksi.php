@@ -149,12 +149,12 @@ function hapusCatatan($id_catatan) {
 function ubahCatatan($data) {
 	global $koneksi;
 
+	$id_catatan = mysqli_real_escape_string($koneksi, $data["id_catatan"]);
 	$tgl_catatan = mysqli_real_escape_string($koneksi, $data["tgl_catatan"]);
 	$nominal = mysqli_real_escape_string($koneksi, $data["nominal_catatan"]);
 	$id_anggaran = mysqli_real_escape_string($koneksi, $data["id_anggaran"]);
 	$id_kategori = mysqli_real_escape_string($koneksi, $data["id_kategori"]);
 	$keterangan = mysqli_real_escape_string($koneksi, $data["keterangan"]);
-	$id_mhs = mysqli_real_escape_string($koneksi, $_SESSION["id_mhs"]);
 
 	$query = "UPDATE catatan_pengeluaran SET
 				id_kategori = '$id_kategori',
@@ -258,15 +258,28 @@ function registrasi($data){
 	return mysqli_affected_rows($koneksi);
 }
 
-function cari($keyword){
-	$query1 = "SELECT * FROM anggaran
+// function cariCatatan($keyword){
+// 	$query = "SELECT * FROM catatan_pengeluaran
+// 				WHERE
+// 			  tgl_catatan LIKE '%$keyword%' OR 
+// 			  nominal_catatan LIKE '%$keyword%' OR 
+// 			  id_anggaran LIKE '%$keyword%' OR
+// 			  id_kategori LIKE '%$keyword%' OR
+// 			  keterangan LIKE '%$keyword%'
+// 			";
+
+// 	return query($query);
+// }
+
+function cariAnggaran($keyword){
+	$query = "SELECT * FROM anggaran
 				WHERE
 			  nama_anggaran LIKE '%$keyword%' OR 
 			  nominal LIKE '%$keyword%' OR 
 			  tgl_mulai LIKE '%$keyword%' OR
-			  tgl_akhir LIKE '%$keyword%'
+			  tgl_akhir LIKE '%$keyword%' 
 			";
 
-	return query($query1);
+	return query($query);
 }
  ?>

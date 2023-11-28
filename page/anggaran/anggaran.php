@@ -25,9 +25,9 @@ $id_mhs = $_SESSION["id_mhs"];
 
 				<?php 	
 						
-						$query = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE anggaran.id_mhs=$id_mhs");
+						$anggaran = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE anggaran.id_mhs=$id_mhs");
 						$no = 1;
-						while($data = mysqli_fetch_assoc($query)) {
+						while($data = mysqli_fetch_assoc($anggaran)) {
 							$nominal = $data['nominal'];
 				?>
 				<tr>

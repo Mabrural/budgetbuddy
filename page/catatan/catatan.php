@@ -8,7 +8,7 @@ $id_mhs = $_SESSION["id_mhs"];
 	<div class="table table-responsive">
 			<a href="?page=tambahCatatan" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahCatatan"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
 			<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="" method="post">
-	        	<input class="form-control me-2" type="search" placeholder="Pencarian" aria-label="Search" name="keyword">
+	        	<input class="form-control me-2" type="text" placeholder="Pencarian" aria-label="Search" name="keyword">
 	       		<button class="btn btn-outline-dark bg-dark" type="submit" name="cari"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
 	    	</form>
 			<br>
@@ -29,9 +29,9 @@ $id_mhs = $_SESSION["id_mhs"];
 
 				<?php 
 
-						$query = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs");
+						$catatan = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs");
 						$no = 1;
-						while($data = mysqli_fetch_assoc($query)) {
+						while($data = mysqli_fetch_assoc($catatan)) {
 							$nominal = $data['nominal_catatan'];
 				?>
 				<tr>
@@ -65,19 +65,19 @@ $id_mhs = $_SESSION["id_mhs"];
 				<input type="hidden" name="id_catatan" value="<?= $data["id_catatan"];?>">
 				<div class="form-group col-md-12">
 					<label >Tanggal Catatan</label>
-					<input type="date" name="nama_anggaran" class="form-control" id="tgl_catatan" value="<?= $data["tgl_catatan"];?>">
+					<input type="date" name="tgl_catatan" class="form-control" id="tgl_catatan" value="<?= $data["tgl_catatan"];?>">
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label >Nominal</label>
-					<input type="text" name="nominal" class="form-control" id="nominal" value="<?= $data["nominal_catatan"];?>" required>
+					<input type="text" name="nominal_catatan" class="form-control" id="nominal_catatan" value="<?= $data["nominal_catatan"];?>" required>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label >Anggaran</label>
-					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
+					<select class="form-select" aria-label="Default select example" name="id_anggaran" id="id_anggaran">
 						<option value="">--Pilih--</option>
 						<?php foreach($anggaran as $row) : ?>
                         <option value="<?= $row['id_anggaran'];?>" <?= ($row['id_anggaran'] == $data['id_anggaran'])?'selected': ''; ?>><?= $row['nama_anggaran']; ?></option>
@@ -88,7 +88,7 @@ $id_mhs = $_SESSION["id_mhs"];
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label >Kategori</label>
-					<select class="form-select" aria-label="Default select example" name="nama_anggaran" id="nama_anggaran">
+					<select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
 						<option value="">--Pilih--</option>
 						<?php foreach($kategori as $row) : ?>
                         	<option value="<?= $row['id_kategori'];?>" <?= ($row['id_kategori'] == $data['id_kategori'])?'selected': ''; ?>><?= $row['nama_kategori']; ?></option>

@@ -13,6 +13,7 @@ if (!isset($_SESSION["login"])) {
 
 	$nama = $_SESSION["username"];
 
+
  ?>
 
 <!DOCTYPE html>
@@ -174,6 +175,9 @@ if (!isset($_SESSION["login"])) {
                                 break;
                             case 'hapusCatatan':
                                 include "page/catatan/hapus.php";
+                                break;
+							case 'cariCatatan':
+                                include "page/catatan/cari.php";
                                 break;
 
                             case 'ubahTagihan':
