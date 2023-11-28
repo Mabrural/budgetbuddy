@@ -27,8 +27,10 @@ $id_mhs = $_SESSION["id_mhs"];
 
 						$query = mysqli_query($koneksi, "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs");
 						$no = 1;
+						$total = 0;
 						while($data = mysqli_fetch_assoc($query)) {
 						$nominal = $data['nominal'];
+						$total += $nominal;
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
@@ -115,6 +117,8 @@ $id_mhs = $_SESSION["id_mhs"];
 				<?php 
 					}
 				 ?>
+				<h5 class="text-right" style="float: right; font-size: 18px; color: red;"> Total : <?= "Rp. ".number_format("$total", 2, ",", ".");?></h5>
+
 			</table>
 	</div>
 </div>

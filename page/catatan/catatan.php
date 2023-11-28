@@ -12,7 +12,7 @@ $id_mhs = $_SESSION["id_mhs"];
 	       		<button class="btn btn-outline-dark bg-dark" type="submit" name="cari"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
 	    	</form>
 			<br>
-			<h5 class="text-right" style="float: right;">Total Pengeluaran : 4450000</h5>
+			<!-- <h5 class="text-right" style="float: right;">Total Pengeluaran : </h5> -->
 			<br>
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
@@ -31,8 +31,10 @@ $id_mhs = $_SESSION["id_mhs"];
 
 						$catatan = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs");
 						$no = 1;
+						$total = 0;
 						while($data = mysqli_fetch_assoc($catatan)) {
 							$nominal = $data['nominal_catatan'];
+							$total += $nominal;
 				?>
 				<tr>
 					<td><?= $no++; ?></td>
@@ -48,6 +50,7 @@ $id_mhs = $_SESSION["id_mhs"];
 						<a href="?form=hapusCatatan&id_catatan=<?= $data['id_catatan'];?>" data-bs-toggle="modal" data-bs-target="#hapusCatatan<?= $no; ?>">Hapus</a>
 					</td>
 				</tr>
+				
 
 <!-- Ubah dengan Modals -->
 <form action="index.php?form=ubahCatatan" method="post">
@@ -143,6 +146,8 @@ $id_mhs = $_SESSION["id_mhs"];
 				<?php 
 					}
 				 ?>
+				 
+				<h5 class="text-right" style="float: right; font-size: 18px; color: red;"> Total : <?= "Rp. ".number_format("$total", 2, ",", ".");?></h5>
 			</table>
 	</div>
 </div>

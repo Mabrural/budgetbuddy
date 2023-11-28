@@ -20,30 +20,19 @@
 
         <div class="mb-3 card-title col-md-4">
           <label>Kategori</label>
-              <select class="form-select" aria-label="Default select example">
-                  <option value="1">Semua</option>
-                  <option value="1">Makanan</option>
-                  <option value="2">Transportasi</option>
-                  <option value="3">Asuransi</option>
-                  <option value="3">Belanja</option>
-                  <option value="3">Elektronik</option>
-                  <option value="3">Hadiah</option>
-                  <option value="3">Hewan Peliharaan</option>
-                  <option value="3">Hiburan</option>
-                  <option value="3">Kantor</option>
-                  <option value="3">Kecantikan</option>
-                  <option value="3">Bayi</option>
-                  <option value="3">Kesehatan</option>
-                  <option value="3">Olahraga</option>
-                  <option value="3">Pajak</option>
-                  <option value="3">Pendidikan</option>
-                  <option value="3">Rumah</option>
-                  <option value="3">Tagihan</option>
-              </select>
+          <select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
+						  <option value="">--Pilih--</option>
+						  <?php foreach($kategori as $row) : ?>
+                <option value="<?= $row['id_kategori'];?>"><?= $row['nama_kategori']; ?></option>
+              <?php endforeach;?>
+					</select>
         </div>
         </div>
+        
+        <br>
           <a href="tambah.php"><button class="btn btn-success btn-sm "><i class="fas fa-eye fa-sm"></i> Tampilkan</button></a>
           <a href="export.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke Excel</button></a>        
+                
         <br>
 
 				<div class="card-body tab table-responsive" style="height: 500px;">
@@ -52,103 +41,47 @@
 						<tr>
               <th scope="col">No</th>
               <th scope="col">Nama Kategori</th>
-              <th scope="col">Total Pengeluaran</th>
+              <th scope="col">Jumlah Pengeluaran</th>
               <th scope="col">Aksi</th>
             </tr>
 					  </thead>
+            
+            <?php
+						  $laporan = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs GROUP BY catatan_pengeluaran.id_kategori");
+
+              $no = 1;
+              $total = 0;
+              while($data = mysqli_fetch_assoc($laporan)) {
+                $nominal = $data['nominal_catatan'];
+                $nominal_anggaran = $data['nominal'];
+                $total += $nominal;
+
+
+                // if($data['nama_kategori'] == $data['nama_kategori']){
+                //   echo $data['nama_kategori'];
+                // }else{
+                //   return false;
+                // }
+            ?>
+
 					  <tbody>
 						<tr>
-              <td>1</td>
-              <td>Makanan</td>
-              <td>1.500.000</td>
+              <td><?= $no++;?></td>
+              <td><?= $data['nama_kategori']?></td>
+              <td><?= "Rp. ".number_format("$nominal", 2, ",", ".")?></td>
               <td>
-                <!-- Button trigger modal -->
-                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1">Detail</a>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Makanan</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                      <div class="card-body tab table-responsive">
-                          <table class="table table-hover bordered bordered-1">
-                            <thead>
-                              
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th>No</th>
-                                <th>Tanggal Catatan</th>
-                                <th>Keterangan</th>
-                                <th>Nominal</th>
-                              </tr>
-                              <tr>
-                                <td>1</td>
-                                <td>23/10/2023</td>
-                                <td>Nasi Ayam Penyet 2</td>
-                                <td>30.000</td>
-                              </tr>
-                              <tr>
-                                <td>2</td>
-                                <td>24/10/2023</td>
-                                <td>Nasi Ayam Bakar 2</td>
-                                <td>30.000</td>
-                              </tr>
-                              <tr>
-                                <td>3</td>
-                                <td>25/10/2023</td>
-                                <td>Nasi Ayam Sambal 2</td>
-                                <td>30.000</td>
-                              </tr>
-                              <tr>
-                                <td>4</td>
-                                <td>26/10/2023</td>
-                                <td>Nasi Ayam Penyet 2</td>
-                                <td>30.000</td>
-                              </tr>
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td rowspan="3"><b>Total Pengeluaran</b></td>
-                                
-                                <td> <b>1.500.000</b></td>
-                              </tr>
-                              
-                              
-                              
-                            </tbody>
-                          </table>
-                      </div>  
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <a href="?page=laporan&id_catatan=<?= $data['id_catatan'];?>" data-bs-toggle="modal" data-bs-target="#detail">Detail</a>
               </td>
             </tr>
 
-            <tr>
-              <td>2</td>
-              <td>Transportasi</td>
-              <td>500.000</td>
-              <td><a href="#">Detail</a></td>
-            <tr>
-              <td>3</td>
-              <td>Pendidikan</td>
-              <td>1.000.000</td>
-              <td><a href="#">Detail</a></td>
-            </tr>
-            
-            
-  
 					  </tbody>
+              <?php
+                  }
+                ?>
+            <div class="row">
+              <a style="text-align: right; float: right; color: red;"><strong>Total Pengeluaran : <?= "Rp. ".number_format("$total", 2, ",", ".")?></strong></a>        
+              <a style="text-align: right; float: right; color: green; margin-right:15px;"><strong>Total Anggaran : <?= "Rp. ".number_format("$nominal_anggaran", 2, ",", ".")?></strong></a>  
+            </div>
 					</table>
           <!-- <nav aria-label="Page navigation example" style="margin-left: 170px;">
             <ul class="pagination">
@@ -169,7 +102,66 @@
           </nav> -->
 				</div>
 </div>
-	
+
+<!-- Modal Detail -->
+<div class="modal fade" id="detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Makanan</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="card-body tab table-responsive">
+          <table class="table table-hover bordered bordered-1">
+            <thead>
+              
+            </thead>
+            <tbody>
+              <tr>
+                <th>No</th>
+                <th>Tanggal Catatan</th>
+                <th>Keterangan</th>
+                <th>Nominal</th>
+              </tr>
+
+              <?php
+
+                $rincian = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs GROUP BY catatan_pengeluaran.id_kategori=kategori.id_kategori");  
+                $no2 = 1;
+                while($data = mysqli_fetch_assoc($rincian)) {
+
+              ?>
+              <tr>
+                <td><?= $no2++?></td>
+                <td><?= date('d-m-Y', strtotime($data['tgl_catatan']));?></td>
+                <td><?= $data['keterangan'];?></td>
+                <td><?= "Rp. ".number_format("$nominal", 2, ",", ".");?></td>
+              </tr>
+      
+             
+ 
+            </tbody>
+                <?php
+                }
+                ?>
+               <tr>
+                <td></td>
+                <td></td>
+                <td rowspan="3"><b>Jumlah Pengeluaran</b></td>
+                
+                <td> <b>1.500.000</b></td>
+              </tr>
+          </table>
+      </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 var xValues = ["Makanan", "Transportasi", "Asuransi", "Belanja", "Elektronik"];
