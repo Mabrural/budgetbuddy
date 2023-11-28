@@ -11,7 +11,7 @@ $id_mhs = $_SESSION["id_mhs"];
 	        	<input class="form-control me-2" type="text" placeholder="Pencarian" aria-label="Search" name="keyword">
 	       		<button class="btn btn-outline-dark bg-dark" type="submit" name="cari"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
 	    	</form>
-			<br>
+			
 			<!-- <h5 class="text-right" style="float: right;">Total Pengeluaran : </h5> -->
 			<br>
 			<table class="table table-striped table-bordered table-hover">
