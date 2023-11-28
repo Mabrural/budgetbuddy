@@ -6,6 +6,7 @@ $id_mhs = $_SESSION["id_mhs"];
 
 <div class="col-md-12 col-lg-12 ">
 	<div class="table table-responsive">
+			<h2 class="text-right" style="float: right; font-size: 25px;">Data Catatan Pengeluaran</h2>
 			<a href="?page=tambahCatatan" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahCatatan"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
 			<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="" method="post">
 	        	<input class="form-control me-2" type="text" placeholder="Pencarian" aria-label="Search" name="keyword">

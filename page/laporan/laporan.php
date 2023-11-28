@@ -1,8 +1,10 @@
 
 
 <div class="col-md-12 col-lg-12 ">
-<h4 class="text-center">Laporan Keuangan</h4>
-				<hr>
+<!-- <h4 class="text-center">Laporan Keuangan</h4>
+				<hr> -->
+			  <h2 class="text-right" style="float: right; font-size: 25px;">Laporan Keuangan </h2>
+       
         
         <center><canvas id="myChart" style="width:100%; max-width:700px min-width: 100px;" class="row-md-12"></canvas></center> 
        
