@@ -10,7 +10,7 @@
        
        <br>
 				<div class="row">
-        <div class="mb-3 card-title col-md-4">
+        <!-- <div class="mb-3 card-title col-md-4">
             <label>Tanggal Awal</label>
             <input type="date" class="form-control" id="tgl_awal" name="tgl_awal">
         </div>
@@ -18,9 +18,18 @@
         <div class="mb-3 card-title col-md-4">
             <label>Tanggal Akhir</label>
             <input type="date" class="form-control" id="tgl_awal" name="tgl_akhir">
+        </div> -->
+        <div class="mb-3 card-title col-md-4">
+          <label>Anggaran</label>
+          <select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
+						  <option value="">--Pilih--</option>
+						  <?php foreach($anggaran as $row) : ?>
+                <option value="<?= $row['id_anggaran'];?>"><?= $row['nama_anggaran']; ?></option>
+              <?php endforeach;?>
+					</select>
         </div>
 
-        <div class="mb-3 card-title col-md-4">
+         <div class="mb-3 card-title col-md-4">
           <label>Kategori</label>
           <select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
 						  <option value="">--Pilih--</option>
