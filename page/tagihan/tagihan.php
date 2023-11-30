@@ -9,7 +9,7 @@ $id_mhs = $_SESSION["id_mhs"];
 		<h2 class="text-right" style="float: right; font-size: 25px;">Data Tagihan</h2>
 		<a href="?page=tambahTagihan" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahTagihan"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
 		<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="?page=tagihan" method="POST">
-			<input class="form-control me-2" type="search" placeholder="Pencarian" aria-label="Search" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari'];}?>">
+			<input class="form-control me-2" type="search" autofocus placeholder="Pencarian" aria-label="Search" autocomplete="off" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari'];}?>">
 			<button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
 		</form>
       <br>

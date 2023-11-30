@@ -29,7 +29,7 @@
 					</select>
         </div>
 
-         <div class="mb-3 card-title col-md-4">
+         <!-- <div class="mb-3 card-title col-md-4">
           <label>Kategori</label>
           <select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
 						  <option value="">--Pilih--</option>
@@ -37,7 +37,7 @@
                 <option value="<?= $row['id_kategori'];?>"><?= $row['nama_kategori']; ?></option>
               <?php endforeach;?>
 					</select>
-        </div>
+        </div> -->
         </div>
         
         <br>

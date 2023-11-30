@@ -8,7 +8,7 @@
 				<h2 class="text-right" style="float: right; font-size: 25px;">Data Anggaran</h2>
 				<a href="?page=tambahAnggaran" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahAnggaran"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
 				<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="?page=anggaran" method="POST">
-					<input class="form-control me-2" type="search" autocomplete="off" placeholder="Pencarian" aria-label="Search" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari']; } ?>">
+					<input class="form-control me-2" type="search" autofocus autocomplete="off" placeholder="Pencarian" aria-label="Search" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari']; } ?>">
 					<button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
 				</form>
 				<br>
