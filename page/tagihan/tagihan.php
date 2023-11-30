@@ -8,9 +8,9 @@ $id_mhs = $_SESSION["id_mhs"];
 	<div class="table table-responsive">
 		<h2 class="text-right" style="float: right; font-size: 25px;">Data Tagihan</h2>
 		<a href="?page=tambahTagihan" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahTagihan"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
-		<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="" method="post">
-			<input class="form-control me-2" type="search" placeholder="Pencarian" aria-label="Search" name="keyword">
-			<button class="btn btn-outline-dark bg-dark" type="submit" name="cari"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
+		<form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="?page=tagihan" method="POST">
+			<input class="form-control me-2" type="search" placeholder="Pencarian" aria-label="Search" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari'];}?>">
+			<button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-magnifying-glass bg-dark text-white fa-sm"></i></button>
 		</form>
       <br>
       <table class="table table-striped table-bordered table-hover">
@@ -23,17 +23,25 @@ $id_mhs = $_SESSION["id_mhs"];
 						<th colspan="3" scope="col">Aksi</th>
 					</tr>
 				</thead>
+				<tr>
+					<?php 
 
-				<?php 
+						if(isset($_POST['cari'])){
+							$pencarian = $_POST['cari'];
+							$query = "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs AND nama_tagihan LIKE '%".$pencarian."%'";
+						} else{
+							$query = "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs";
+						}
 
-						$query = mysqli_query($koneksi, "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs");
+						// $query = mysqli_query($koneksi, "SELECT * FROM tagihan WHERE tagihan.id_mhs=$id_mhs");
 						$no = 1;
 						$total = 0;
-						while($data = mysqli_fetch_assoc($query)) {
+						$tampil = mysqli_query($koneksi, $query);
+						while($data = mysqli_fetch_assoc($tampil)) {
 						$nominal = $data['nominal'];
 						$total += $nominal;
-				?>
-				<tr>
+					?>
+				
 					<td><?= $no++; ?></td>
 					<td><?= $data['nama_tagihan']; ?></td>
 					<td><?= "Rp. ".number_format("$nominal", 2, ",", "."); ?></td>

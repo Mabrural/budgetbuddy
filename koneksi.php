@@ -277,9 +277,18 @@ function cariAnggaran($keyword){
 			  nama_anggaran LIKE '%$keyword%' OR 
 			  nominal LIKE '%$keyword%' OR 
 			  tgl_mulai LIKE '%$keyword%' OR
-			  tgl_akhir LIKE '%$keyword%' 
+			  tgl_akhir LIKE '%$keyword%'
 			";
 
 	return query($query);
 }
+
+
+// function cariAnggaran($keyword, $koneksi) {
+// 	// Buat kueri SQL dengan operator LIKE untuk pencarian wildcard
+// 	$query = "SELECT * FROM anggaran WHERE nama_anggaran LIKE '%$keyword%' OR nominal LIKE '%$keyword%' OR tgl_mulai LIKE '%$keyword%' OR tgl_akhir LIKE '%$keyword%'";
+  
+// 	// Eksekusi kueri dan kembalikan hasil
+// 	return mysqli_query($koneksi, $query);
+//   }
  ?>

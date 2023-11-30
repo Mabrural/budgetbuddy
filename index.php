@@ -12,8 +12,7 @@ if (!isset($_SESSION["login"])) {
 	$anggaran = query("SELECT * FROM anggaran WHERE anggaran.id_mhs=$id_mhs");
 
 	$nama = $_SESSION["username"];
-
-
+	
  ?>
 
 <!DOCTYPE html>
@@ -166,6 +165,10 @@ if (!isset($_SESSION["login"])) {
                             case 'hapusAnggaran':
                                 include "page/anggaran/hapus.php";
                                 break;
+								
+							case 'cariAnggaran':
+								include "page/anggaran/cari.php";
+								break;
 
                             case 'ubahCatatan':
                                 include "page/catatan/ubah.php";
