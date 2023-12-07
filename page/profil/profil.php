@@ -1,4 +1,9 @@
+<?php
 
+$id_mhs = $_SESSION['id_mhs'];
+$nama = $_SESSION["username"];
+
+?>
         
       <div class="col-md-12 col-lg-12">
         <br>
@@ -62,20 +67,27 @@
         <hr>
 				
         <br>
-     
+      <?php
+
+          // $profil = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE mahasiswa.id_mhs=$id_mhs");
+          // $tampil = mysqli_query($koneksi, $profil);
+          // while($data = mysqli_fetch_assoc($tampil)){
+      ?>
 				<div class="card-body tab table-responsive" style="height: 170px;">
 					<h5>Informasi Pribadi</h5><hr>
           <h6>Nama Lengkap:</h6>
-          <p>asdad</p>
+          <p><?= "asdas" ?></p>
 
           <h6>Nama Pengguna:</h6>
-          <p>Rendra123</p>
+          <p><?= $nama; ?></p>
 
           <h6>Email:</h6>
           <p>mahasiswa@student.polibatam.ac.id</p>
+
+          <?php  ?>
 				</div>
         <br><br>
-             
+      
       </div><br><br>
       
 

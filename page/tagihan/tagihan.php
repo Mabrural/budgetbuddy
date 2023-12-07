@@ -126,9 +126,10 @@ $id_mhs = $_SESSION["id_mhs"];
 				<?php 
 					}
 				 ?>
-				<h5 class="text-right" style="float: right; font-size: 18px; color: red;"> Total : <?= "Rp. ".number_format("$total", 2, ",", ".");?></h5>
 
 			</table>
+			<h5 class="text-right" style="float: right; font-size: 18px; color: red;"> Total : <?= "Rp. ".number_format("$total", 2, ",", ".");?></h5>
+
 	</div>
 </div>
 

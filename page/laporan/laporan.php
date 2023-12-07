@@ -1,5 +1,4 @@
 
-
 <div class="col-md-12 col-lg-12 ">
 <!-- <h4 class="text-center">Laporan Keuangan</h4>
 				<hr> -->
@@ -10,38 +9,29 @@
        
        <br>
 				<div class="row">
-        <!-- <div class="mb-3 card-title col-md-4">
-            <label>Tanggal Awal</label>
-            <input type="date" class="form-control" id="tgl_awal" name="tgl_awal">
-        </div>
+  
+        <!-- Form Filter -->
+        <form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="" method="POST">
+            <!-- <input class="form-control me-2" type="search" autofocus autocomplete="off" placeholder="Pencarian" aria-label="Search" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari']; }?>"> -->
+            <select class="form-select" name="filter_anggaran">
+                <option value="">--Pilih Anggaran--</option>
+                <?php
+                // Ambil data anggaran dari database
+                $result = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE id_mhs=$id_mhs");
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='" . $row['id_anggaran'] . "'>" . $row['nama_anggaran'] . "</option>";
+                }
+                ?>
+            </select>
+            <button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-filter bg-dark text-white fa-sm"></i></button>
+        </form><br>
+        <!-- Akhir Form Filter -->
 
-        <div class="mb-3 card-title col-md-4">
-            <label>Tanggal Akhir</label>
-            <input type="date" class="form-control" id="tgl_awal" name="tgl_akhir">
-        </div> -->
-        <div class="mb-3 card-title col-md-4">
-          <label>Anggaran</label>
-          <select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
-						  <option value="">--Pilih--</option>
-						  <?php foreach($anggaran as $row) : ?>
-                <option value="<?= $row['id_anggaran'];?>"><?= $row['nama_anggaran']; ?></option>
-              <?php endforeach;?>
-					</select>
-        </div>
 
-         <!-- <div class="mb-3 card-title col-md-4">
-          <label>Kategori</label>
-          <select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
-						  <option value="">--Pilih--</option>
-						  <?php foreach($kategori as $row) : ?>
-                <option value="<?= $row['id_kategori'];?>"><?= $row['nama_kategori']; ?></option>
-              <?php endforeach;?>
-					</select>
-        </div> -->
-        </div>
+
         
         <br>
-          <a href="tambah.php"><button class="btn btn-success btn-sm "><i class="fas fa-eye fa-sm"></i> Tampilkan</button></a>
+          <!-- <a href="tambah.php"><button class="btn btn-success btn-sm "><i class="fas fa-eye fa-sm"></i> Tampilkan</button></a> -->
           <a href="export.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke Excel</button></a>        
                 
         <br>
@@ -58,13 +48,23 @@
 					  </thead>
             
             <?php
-						  $laporan = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs GROUP BY catatan_pengeluaran.id_kategori");
+              // Tambahkan kondisi filter anggaran ke dalam query
+              $filter_anggaran = isset($_GET['filter_anggaran']) ? $_GET['filter_anggaran'] : '';
+              $query = "SELECT SUM(catatan_pengeluaran.nominal_catatan) as nominal_catatan, kategori.* FROM catatan_pengeluaran, kategori WHERE catatan_pengeluaran.id_mhs = $id_mhs AND catatan_pengeluaran.id_kategori=kategori.id_kategori";
+              if (!empty($filter_anggaran)) {
+                  $query .= " AND catatan_pengeluaran.id_anggaran = $filter_anggaran";
+              }
+              $query .= " GROUP BY catatan_pengeluaran.id_kategori";
+
+
+						  // $laporan = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs GROUP BY catatan_pengeluaran.id_kategori");
+              $laporan = mysqli_query($koneksi, "SELECT SUM(catatan_pengeluaran.nominal_catatan) as nominal_catatan, kategori.* FROM catatan_pengeluaran, kategori WHERE catatan_pengeluaran.id_mhs = $id_mhs AND catatan_pengeluaran.id_kategori=kategori.id_kategori GROUP BY catatan_pengeluaran.id_kategori");
 
               $no = 1;
               $total = 0;
               while($data = mysqli_fetch_assoc($laporan)) {
                 $nominal = $data['nominal_catatan'];
-                $nominal_anggaran = $data['nominal'];
+                // $nominal_anggaran = $data['nominal'];
                 $total += $nominal;
 
 
@@ -81,7 +81,7 @@
               <td><?= $data['nama_kategori']?></td>
               <td><?= "Rp. ".number_format("$nominal", 2, ",", ".")?></td>
               <td>
-                <a href="?page=laporan&id_catatan=<?= $data['id_catatan'];?>" data-bs-toggle="modal" data-bs-target="#detail">Detail</a>
+                <a href="?page=laporan&id_kategori=<?= $data['id_kategori'];?>" data-bs-toggle="modal" data-bs-target="#detail">Detail</a>
               </td>
             </tr>
 
@@ -91,7 +91,7 @@
                 ?>
             <div class="row">
               <a style="text-align: right; float: right; color: red;"><strong>Total Pengeluaran : <?= "Rp. ".number_format("$total", 2, ",", ".")?></strong></a>        
-              <a style="text-align: right; float: right; color: green; margin-right:15px;"><strong>Total Anggaran : <?= "Rp. ".number_format("$nominal_anggaran", 2, ",", ".")?></strong></a>  
+              <!-- <a style="text-align: right; float: right; color: green; margin-right:15px;"><strong>Total Anggaran : <?= "Rp. ".number_format("$total", 2, ",", ".")?></strong></a>   -->
             </div>
 					</table>
           <!-- <nav aria-label="Page navigation example" style="margin-left: 170px;">

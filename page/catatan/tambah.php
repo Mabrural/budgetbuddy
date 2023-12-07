@@ -1,12 +1,12 @@
 <?php 
-
+	// $id_mhs = $_SESSION['id_mhs'];
 // cek apakah tombol submit sudah ditekan atau belum
 if (isset($_POST["submit"])) {
 	
 
-
 	// cek apakah data berhasil ditambahkan atau tidak
 	if(tambahCatatan($_POST) > 0 ) {
+		
 		echo "
 			<script>
 				alert('Data berhasil ditambahkan');
