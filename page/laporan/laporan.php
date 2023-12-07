@@ -8,35 +8,38 @@
         <center><canvas id="myChart" style="width:100%; max-width:700px min-width: 100px;" class="row-md-12"></canvas></center> 
        
        <br>
-				<div class="row">
+			<div class="row">
   
         <!-- Form Filter -->
-        <form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="" method="POST">
+        <form class="d-flex col-lg-4 col-md-12 col-sm-12" role="search" action="" method="POST">
             <!-- <input class="form-control me-2" type="search" autofocus autocomplete="off" placeholder="Pencarian" aria-label="Search" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari']; }?>"> -->
-            <select class="form-select" name="filter_anggaran">
-                <option value="">--Pilih Anggaran--</option>
-                <?php
-                // Ambil data anggaran dari database
-                $result = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE id_mhs=$id_mhs");
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<option value='" . $row['id_anggaran'] . "'>" . $row['nama_anggaran'] . "</option>";
-                }
-                ?>
-            </select>
-            <button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-filter bg-dark text-white fa-sm"></i></button>
-        </form><br>
+            <div class="col-lg-8">
+              <select class="form-select" name="filter_anggaran">
+                  <option value="">--Pilih Anggaran--</option>
+                  <?php
+                  // Ambil data anggaran dari database
+                  $result = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE id_mhs=$id_mhs");
+                  while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<option value='" . $row['id_anggaran'] . "'>" . $row['nama_anggaran'] . "</option>";
+                  }
+                  ?>
+              </select>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12">
+                <button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-filter bg-dark text-white fa-sm"></i></button>
+            </div>
+            <div class="col-lg-5">
+                <a href="export.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke PDF</button></a>        
+            </div>
+        </form>
+        
         <!-- Akhir Form Filter -->
 
 
 
-        
-        <br>
-          <!-- <a href="tambah.php"><button class="btn btn-success btn-sm "><i class="fas fa-eye fa-sm"></i> Tampilkan</button></a> -->
-          <a href="export.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke Excel</button></a>        
-                
-        <br>
 
 				<div class="card-body tab table-responsive" style="height: 500px;">
+
 					<table class="table table-hover table-responsive overflow-scroll">
 					  <thead>
 						<tr>
@@ -67,12 +70,6 @@
                 // $nominal_anggaran = $data['nominal'];
                 $total += $nominal;
 
-
-                // if($data['nama_kategori'] == $data['nama_kategori']){
-                //   echo $data['nama_kategori'];
-                // }else{
-                //   return false;
-                // }
             ?>
 
 					  <tbody>

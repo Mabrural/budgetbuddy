@@ -28,11 +28,28 @@ if (isset($_POST['login'])) {
 			$_SESSION["login"] = true;
             $_SESSION["username"] = $_POST["username"];
             $_SESSION["id_mhs"] = $row["id_mhs"];
-            echo 
-            "<script>
-                alert('Login berhasil!');
-                document.location.href = 'index.php';
+            echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+            echo '<script src="./sweetalert2.min.js"></script>';
+            echo "<script>
+            setTimeout(function () { 
+                swal.fire({
+                    
+                    title               : 'Berhasil',
+                    text                :  'Login berhasil',
+                    //footer              :  '',
+                    icon                : 'success',
+                    timer               : 2000,
+                    showConfirmButton   : true
+                });  
+            },10);   setTimeout(function () {
+                window.location.href = 'index.php'; //will redirect to your blog page (an ex: blog.html)
+            }, 2000); //will call the function after 2 secs
             </script>";
+            // echo 
+            // "<script>
+            //     alert('Login berhasil!');
+            //     document.location.href = 'index.php';
+            // </script>";
 			exit;
 		}
         else{
@@ -80,7 +97,27 @@ if (isset($_POST['login'])) {
             </div>
 
             <?php if(isset($error)) :?>
-               <center> <p style="color: red; font-style: italic;">Username / password salah</p> </center>
+                <?php
+                    echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+                    echo '<script src="./sweetalert2.min.js"></script>';
+                    echo "<script>
+                    setTimeout(function () { 
+                        swal.fire({
+                            
+                            title               : 'Login Gagal',
+                            text                :  'Username / Password Salah',
+                            //footer              :  '',
+                            icon                : 'error',
+                            timer               : 2000,
+                            showConfirmButton   : true
+                        });  
+                    },10);   setTimeout(function () {
+                        window.location.href = 'index.php'; //will redirect to your blog page (an ex: blog.html)
+                    }, 2000); //will call the function after 2 secs
+                    </script>";    
+                ?>
+               <!-- <center> <p style="color: red; font-style: italic;">Username / password salah</p> </center> -->
+
             <?php endif; ?>
             
             <form action="" method="post">
