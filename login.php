@@ -69,6 +69,7 @@ if (isset($_POST['login'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Budget Buddy</title>
     <!-- bootstrap css repository offline-->
+	<link rel="icon" type="image/png" href="img/LOGO_Prod_TRPL_Variant_09_Square Color.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="font-awesome/css/all.min.css">

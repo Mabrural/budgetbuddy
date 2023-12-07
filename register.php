@@ -5,14 +5,31 @@ if (isset($_POST['register']) ) {
 	
 	if(registrasi($_POST) > 0 ){
 
-        
-		echo "
-			<script>
-				alert('User baru berhasil ditambahkan!');
-                document.location.href = 'login.php';
-			</script>
+        echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+        echo '<script src="./sweetalert2.min.js"></script>';
+        echo "<script>
+        setTimeout(function () { 
+            swal.fire({
+                
+                title               : 'Daftar Akun Berhasil',
+                text                :  'User baru berhasil ditambahkan',
+                //footer              :  '',
+                icon                : 'success',
+                timer               : 2000,
+                showConfirmButton   : true
+            });  
+        },10);   setTimeout(function () {
+            window.location.href = 'index.php'; //will redirect to your blog page (an ex: blog.html)
+        }, 2000); //will call the function after 2 secs
+        </script>";
+            
+		// echo "
+		// 	<script>
+		// 		alert('User baru berhasil ditambahkan!');
+        //         document.location.href = 'login.php';
+		// 	</script>
 
-		";  
+		// ";  
 
 	} else {
 		echo mysqli_error($koneksi);
@@ -30,6 +47,7 @@ if (isset($_POST['register']) ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Budget Buddy</title>
     <!-- bootstrap css repository offline-->
+	<link rel="icon" type="image/png" href="img/LOGO_Prod_TRPL_Variant_09_Square Color.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="font-awesome/css/all.min.css">

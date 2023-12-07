@@ -230,11 +230,28 @@ function registrasi($data){
 	// cek username sudah ada atau belum
 	$result = mysqli_query($koneksi, "SELECT username FROM mahasiswa WHERE username= '$username'");
 	if (mysqli_fetch_assoc($result)) {
-		echo "
-			<script>
-				alert('Username yang dipilih sudah terdaftar!');
-			</script>
-		";
+		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+		echo '<script src="./sweetalert2.min.js"></script>';
+		echo "<script>
+		setTimeout(function () { 
+			swal.fire({
+				
+				title               : 'Daftar Akun Gagal',
+				text                :  'Username yang dipilih sudah terdaftar',
+				//footer              :  '',
+				icon                : 'error',
+				timer               : 2000,
+				showConfirmButton   : true
+			});  
+		},10);   setTimeout(function () {
+			window.location.href = 'index.php'; //will redirect to your blog page (an ex: blog.html)
+		}, 2000); //will call the function after 2 secs
+		</script>";
+		// echo "
+		// 	<script>
+		// 		alert('Username yang dipilih sudah terdaftar!');
+		// 	</script>
+		// ";
 		return false;
 	}
 
