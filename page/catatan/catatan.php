@@ -8,13 +8,14 @@ $id_mhs = $_SESSION["id_mhs"];
         <a href="?page=tambahCatatan" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahCatatan"><i class="fas fa-plus fa-sm"></i> Tambah</a>
         <br><br>
         <!-- Form Filter -->
-        <form class="d-flex col-lg-4 col-md-4 col-sm-12" role="search" action="" method="POST">
+        <form class="d-flex col-lg-4 col-md-12 col-sm-12" role="search" action="" method="POST">
             <!-- <input class="form-control me-2" type="search" autofocus autocomplete="off" placeholder="Pencarian" aria-label="Search" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari']; }?>"> -->
-            <select class="form-select" name="filter_anggaran">
+            <select class="form-select mx-2" name="filter_anggaran">
                 <option value="">--Pilih Anggaran--</option>
                 <?php
                 // Ambil data anggaran dari database
                 $result = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE id_mhs=$id_mhs");
+				
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<option value='" . $row['id_anggaran'] . "'>" . $row['nama_anggaran'] . "</option>";
                 }

@@ -9,10 +9,26 @@
        
        <br>
 			<div class="row">
-  
+        <form class="d-flex col-lg-4 col-md-12 col-sm-12" role="search" action="index.php" method="GET"><input type="hidden" name="page" value="laporan">
+            
+            <select class="form-select mx-2" name="filter_anggaran">
+                <option value="">--Pilih Anggaran--</option>
+                <?php
+                // Ambil data anggaran dari database
+                $result = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE id_mhs=$id_mhs");
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='" . $row['id_anggaran'] . "'>" . $row['nama_anggaran'] . "</option>";
+                }
+                ?>
+            </select>
+            <button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-filter bg-dark text-white fa-sm"></i></button>
+        </form>
+          <div class="mx-2 mt-2">
+            <a href="export.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke PDF</button></a>
+          </div>
         <!-- Form Filter -->
-        <form class="d-flex col-lg-4 col-md-12 col-sm-12" role="search" action="" method="POST">
-            <!-- <input class="form-control me-2" type="search" autofocus autocomplete="off" placeholder="Pencarian" aria-label="Search" name="cari" value="<?php if(isset($_POST['cari'])) { echo $_POST['cari']; }?>"> -->
+        <!-- <form class="d-flex col-lg-4 col-md-12 col-sm-12" role="search" action="" method="POST">
+            
             <div class="col-lg-8">
               <select class="form-select" name="filter_anggaran">
                   <option value="">--Pilih Anggaran--</option>
@@ -31,7 +47,7 @@
             <div class="col-lg-5">
                 <a href="export.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke PDF</button></a>        
             </div>
-        </form>
+        </form> -->
         
         <!-- Akhir Form Filter -->
 
@@ -53,15 +69,21 @@
             <?php
               // Tambahkan kondisi filter anggaran ke dalam query
               $filter_anggaran = isset($_GET['filter_anggaran']) ? $_GET['filter_anggaran'] : '';
-              $query = "SELECT SUM(catatan_pengeluaran.nominal_catatan) as nominal_catatan, kategori.* FROM catatan_pengeluaran, kategori WHERE catatan_pengeluaran.id_mhs = $id_mhs AND catatan_pengeluaran.id_kategori=kategori.id_kategori";
+              $query = "SELECT SUM(catatan_pengeluaran.nominal_catatan) as nominal_catatan, kategori.* FROM catatan_pengeluaran, kategori WHERE catatan_pengeluaran.id_mhs = $id_mhs AND catatan_pengeluaran.id_kategori=kategori.id_kategori 
+              ";
               if (!empty($filter_anggaran)) {
-                  $query .= " AND catatan_pengeluaran.id_anggaran = $filter_anggaran";
+                  // $query .= " AND catatan_pengeluaran.id_anggaran = $filter_anggaran";
+                  $query = "SELECT SUM(catatan_pengeluaran.nominal_catatan) as nominal_catatan, kategori.* FROM catatan_pengeluaran, kategori WHERE catatan_pengeluaran.id_mhs = $id_mhs AND catatan_pengeluaran.id_kategori=kategori.id_kategori 
+                  AND catatan_pengeluaran.id_anggaran=$filter_anggaran";
               }
               $query .= " GROUP BY catatan_pengeluaran.id_kategori";
-
+            
 
 						  // $laporan = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs GROUP BY catatan_pengeluaran.id_kategori");
-              $laporan = mysqli_query($koneksi, "SELECT SUM(catatan_pengeluaran.nominal_catatan) as nominal_catatan, kategori.* FROM catatan_pengeluaran, kategori WHERE catatan_pengeluaran.id_mhs = $id_mhs AND catatan_pengeluaran.id_kategori=kategori.id_kategori GROUP BY catatan_pengeluaran.id_kategori");
+              // $laporan = mysqli_query($koneksi, "SELECT SUM(catatan_pengeluaran.nominal_catatan) as nominal_catatan, kategori.* FROM catatan_pengeluaran, kategori WHERE catatan_pengeluaran.id_mhs = $id_mhs AND catatan_pengeluaran.id_kategori=kategori.id_kategori 
+              // AND catatan_pengeluaran.id_anggaran=50 GROUP BY catatan_pengeluaran.id_kategori");
+              $laporan = mysqli_query($koneksi, $query);
+              
 
               $no = 1;
               $total = 0;
