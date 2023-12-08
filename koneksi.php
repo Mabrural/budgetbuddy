@@ -275,6 +275,96 @@ function registrasi($data){
 	return mysqli_affected_rows($koneksi);
 }
 
+// function ubahProfil($data){
+// 	global $koneksi;
+
+//     $nama = stripcslashes($data["nama_mhs"]);
+// 	$username = strtolower(stripcslashes($data["username"]));
+// 	$password = mysqli_real_escape_string($koneksi, $data["password"]);
+//     $password2 = mysqli_real_escape_string($koneksi, $data["password2"]);
+//     $no_hp = stripcslashes($data["no_hp"]);
+//     $alamat = stripcslashes($data["alamat"]);
+//     $email = stripcslashes($data["email"]);
+	
+
+// 	// cek username sudah ada atau belum
+// 	$result = mysqli_query($koneksi, "SELECT username FROM mahasiswa WHERE username= '$username'");
+// 	if (mysqli_fetch_assoc($result)) {
+// 		echo '<link rel="stylesheet" href="./sweetalert2.min.css"></script>';
+// 		echo '<script src="./sweetalert2.min.js"></script>';
+// 		echo "<script>
+// 		setTimeout(function () { 
+// 			swal.fire({
+				
+// 				title               : 'Daftar Akun Gagal',
+// 				text                :  'Username yang dipilih sudah terdaftar',
+// 				//footer              :  '',
+// 				icon                : 'error',
+// 				timer               : 2000,
+// 				showConfirmButton   : true
+// 			});  
+// 		},10);   setTimeout(function () {
+// 			window.location.href = 'index.php'; //will redirect to your blog page (an ex: blog.html)
+// 		}, 2000); //will call the function after 2 secs
+// 		</script>";
+// 		// echo "
+// 		// 	<script>
+// 		// 		alert('Username yang dipilih sudah terdaftar!');
+// 		// 	</script>
+// 		// ";
+// 		return false;
+// 	}
+
+// 	// cek konfirmasi password
+// 	if ($password !== $password2) {
+// 		echo "
+// 			<script>
+// 				alert('konfirmasi password tidak sesuai!');
+// 			</script>
+// 		";
+// 		return false;
+// 	}
+
+// 	// enkripsi password
+// 	$password = password_hash($password, PASSWORD_DEFAULT);
+
+
+// 	// tambahkan user baru ke database
+// 	mysqli_query($koneksi, "INSERT INTO mahasiswa VALUES('','$nama', '$username', '$password', '$no_hp', '$alamat', '$email')");
+
+// 	return mysqli_affected_rows($koneksi);
+// }
+
+function ubahProfil($data){
+	global $koneksi;
+	$id_mhs = $data['id_mhs'];
+    $nama = stripcslashes($data["nama_mhs"]);
+	$username =stripcslashes($data["username"]);
+	$password = mysqli_real_escape_string($koneksi, $data["password"]);
+    $no_hp = stripcslashes($data["no_hp"]);
+    $alamat = stripcslashes($data["alamat"]);
+    $email = stripcslashes($data["email"]);
+
+	
+	$password2 = password_hash($password, PASSWORD_DEFAULT);
+
+		// Update user data in the database
+		$update_query = "UPDATE mahasiswa 
+		SET nama_mhs = '$nama', 
+			username = '$username',
+			password = '$password2',
+			no_hp = '$no_hp', 
+			alamat = '$alamat', 
+			email = '$email' 
+		WHERE id_mhs='$id_mhs'";
+	
+	
+
+	mysqli_query($koneksi, $update_query);
+
+	return mysqli_affected_rows($koneksi);
+}
+
 // function cariCatatan($keyword){
 // 	$query = "SELECT * FROM catatan_pengeluaran
 // 				WHERE

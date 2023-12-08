@@ -8,7 +8,7 @@
         <center><canvas id="myChart" style="width:100%; max-width:700px min-width: 100px;" class="row-md-12"></canvas></center> 
        
        <br>
-			<div class="row">
+			<div class="row">    
         <form class="d-flex col-lg-4 col-md-12 col-sm-12" role="search" action="index.php" method="GET"><input type="hidden" name="page" value="laporan">
             
             <select class="form-select mx-2" name="filter_anggaran">
@@ -24,7 +24,7 @@
             <button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-filter bg-dark text-white fa-sm"></i></button>
         </form>
           <div class="mx-2 mt-2">
-            <a href="export.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke PDF</button></a>
+            <a href="laporan/laporan_keuangan.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke PDF</button></a>
           </div>
         <!-- Form Filter -->
         <!-- <form class="d-flex col-lg-4 col-md-12 col-sm-12" role="search" action="" method="POST">
@@ -131,6 +131,7 @@
             </ul>
           </nav> -->
 				</div>
+        
 </div>
 
 <!-- Modal Detail -->
@@ -157,16 +158,18 @@
 
               <?php
 
-                $rincian = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs GROUP BY catatan_pengeluaran.id_kategori=kategori.id_kategori");  
+                // $rincian = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND   $id_mhs GROUP BY catatan_pengeluaran.id_kategori=kategori.id_kategori");  
+                $rincian = mysqli_query($koneksi, "SELECT tgl_catatan, keterangan, nominal_catatan FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs ORDER BY catatan_pengeluaran.id_kategori"); 
                 $no2 = 1;
                 while($data = mysqli_fetch_assoc($rincian)) {
+                $nominal2 = $data['nominal_catatan'];
 
               ?>
               <tr>
                 <td><?= $no2++?></td>
                 <td><?= date('d-m-Y', strtotime($data['tgl_catatan']));?></td>
                 <td><?= $data['keterangan'];?></td>
-                <td><?= "Rp. ".number_format("$nominal", 2, ",", ".");?></td>
+                <td><?= "Rp. ".number_format("$nominal2", 2, ",", ".");?></td>
               </tr>
       
              
@@ -180,7 +183,7 @@
                 <td></td>
                 <td rowspan="3"><b>Jumlah Pengeluaran</b></td>
                 
-                <td> <b>1.500.000</b></td>
+                <td> <b><?= "Rp. ".number_format("$total", 2, ",", ".")?></b></td>
               </tr>
           </table>
       </div>  
@@ -192,6 +195,10 @@
     </div>
   </div>
 </div>
+              <?php
+                  // }
+                ?>
+
 
 <script>
 var xValues = ["Makanan", "Transportasi", "Asuransi", "Belanja", "Elektronik"];
