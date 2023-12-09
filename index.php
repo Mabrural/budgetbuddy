@@ -29,6 +29,8 @@ if (!isset($_SESSION["login"])) {
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
 
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 	<!-- datatables -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -66,9 +68,9 @@ if (!isset($_SESSION["login"])) {
             <li><a class="dropdown-item text-black" href="logout.php"><i class="fas fa-right-to-bracket"></i> Keluar</a></li>
           </ul>
         </li>
-		<li class="nav-item">
+		<!-- <li class="nav-item">
           <a class="nav-link" style="color: white;" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-bell fa-lg"></i></a>
-        </li>	
+        </li>	 -->
                 
         <!-- <form class="d-flex" role="search">
 	        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

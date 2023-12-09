@@ -2,8 +2,8 @@
 session_start();
 
 if (!isset($_SESSION["login"])) {
-	header("Location: ../login.php");
-	exit;
+  header("Location: ../login.php");
+  exit;
 }
 include '../fpdf/fpdf.php';
 include '../koneksi.php';
@@ -31,11 +31,11 @@ $tampil = mysqli_query($koneksi, $query);
 // $nominal = $data['nominal_catatan'];
 
 while ($hasil = mysqli_fetch_assoc($tampil)) {
-	$pdf->Cell(1,0.8,$no, 1,0);
-	$pdf->Cell(6,0.8,$hasil['nama_kategori'],1,0);
-	$nominal = $hasil['nominal_catatan'];
-	$pdf->Cell(7,0.8,"Rp. ".number_format("$nominal", 2, ",", "."),1,0);
-	$pdf->ln();
+  $pdf->Cell(1,0.8,$no, 1,0);
+  $pdf->Cell(6,0.8,$hasil['nama_kategori'],1,0);
+  $nominal = $hasil['nominal_catatan'];
+  $pdf->Cell(7,0.8,"Rp. ".number_format("$nominal", 2, ",", "."),1,0);
+  $pdf->ln();
     $no++;
 }
 $pdf->Output("laporan_mahasiswa.pdf", "I");

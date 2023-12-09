@@ -1,11 +1,15 @@
-
+<?php
+$conn = mysqli_connect("localhost", "root", "78789898", "budget");
+$id_mhs = $_SESSION["id_mhs"];
+?>
 <div class="col-md-12 col-lg-12 ">
 <!-- <h4 class="text-center">Laporan Keuangan</h4>
 				<hr> -->
 			  <h2 class="text-right" style="float: right; font-size: 25px;">Laporan Keuangan </h2>
+        <br><br>
        
-        
-        <center><canvas id="myChart" style="width:100%; max-width:700px min-width: 100px;" class="row-md-12"></canvas></center> 
+        <center><div id="piechart" style="width: 100%; max-width:700px; height: 500px; min-width: 100%;" class="row-md-12"></div></center>
+        <!-- <center><canvas id="myChart" style="width:100%; max-width:700px min-width: 100px;" class="row-md-12"></canvas></center>  -->
        
        <br>
 			<div class="row">    
@@ -75,8 +79,11 @@
                   // $query .= " AND catatan_pengeluaran.id_anggaran = $filter_anggaran";
                   $query = "SELECT SUM(catatan_pengeluaran.nominal_catatan) as nominal_catatan, kategori.* FROM catatan_pengeluaran, kategori WHERE catatan_pengeluaran.id_mhs = $id_mhs AND catatan_pengeluaran.id_kategori=kategori.id_kategori 
                   AND catatan_pengeluaran.id_anggaran=$filter_anggaran";
+                  
               }
               $query .= " GROUP BY catatan_pengeluaran.id_kategori";
+
+              
             
 
 						  // $laporan = mysqli_query($koneksi, "SELECT * FROM catatan_pengeluaran JOIN anggaran ON catatan_pengeluaran.id_anggaran = anggaran.id_anggaran JOIN kategori ON catatan_pengeluaran.id_kategori=kategori.id_kategori WHERE catatan_pengeluaran.id_kategori = kategori.id_kategori AND catatan_pengeluaran.id_anggaran = anggaran.id_anggaran AND catatan_pengeluaran.id_catatan AND catatan_pengeluaran.id_mhs=$id_mhs GROUP BY catatan_pengeluaran.id_kategori");
@@ -199,33 +206,45 @@
                   // }
                 ?>
 
+<?php
+// Ambil data filter dari GET
+$filter_anggaran = isset($_GET['filter_anggaran']) ? $_GET['filter_anggaran'] : '';
+?>
 
-<script>
-var xValues = ["Makanan", "Transportasi", "Asuransi", "Belanja", "Elektronik"];
-var yValues = [55, 49, 44, 24, 15];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
 
-new Chart("myChart", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    responsive: true,
-    title: {
-      display: true,
-      text: "Budget Buddy"
-    }
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Kategori', 'Nominal'],
+      <?php 
+      // Gunakan variabel $_GET untuk filter
+      $filter_anggaran = isset($_GET['filter_anggaran']) ? $_GET['filter_anggaran'] : '';
+
+      $sql = "SELECT SUM(cp.nominal_catatan) as nominal_catatan, k.nama_kategori FROM catatan_pengeluaran cp JOIN kategori k ON cp.id_kategori = k.id_kategori WHERE cp.id_mhs = $id_mhs";
+
+      // Tambahkan kondisi filter jika ada
+      if (!empty($filter_anggaran)) {
+          $sql .= " AND cp.id_anggaran = $filter_anggaran";
+      }
+
+      $sql .= " GROUP BY cp.id_kategori";
+
+      $fire = mysqli_query($conn, $sql);
+      while($result = mysqli_fetch_assoc($fire)){
+          echo "['".addslashes($result['nama_kategori'])."', ".$result['nominal_catatan']."],";
+      }
+      ?>
+    ]);
+
+    var options = {
+      title: 'Budget Buddy'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
   }
-});
 </script>
+
+
