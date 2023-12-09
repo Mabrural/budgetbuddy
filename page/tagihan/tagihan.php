@@ -4,7 +4,7 @@ $id_mhs = $_SESSION["id_mhs"];
 
 ?>
 
-<div class="col-md-12 col-lg-12 ">
+<div class="col-md-12 col-lg-12 ">  
 	<div class="table table-responsive">
 		<h2 class="text-right" style="float: right; font-size: 25px;">Data Tagihan</h2>
 		<a href="?page=tambahTagihan" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahTagihan"><i class="fas fa-plus fa-sm"></i> Tambah</a> <br><br>
@@ -23,7 +23,7 @@ $id_mhs = $_SESSION["id_mhs"];
 						<th colspan="3" scope="col">Aksi</th>
 					</tr>
 				</thead>
-				<tr>
+				
 					<?php 
 
 						if(isset($_POST['cari'])){
@@ -41,7 +41,7 @@ $id_mhs = $_SESSION["id_mhs"];
 						$nominal = $data['nominal'];
 						$total += $nominal;
 					?>
-				
+				<tr class="tagihan-row" data-nama-tagihan="<?= $data['nama_tagihan'] ?>" data-tgl-due="<?= $data['tgl_due'] ?>">
 					<td><?= $no++; ?></td>
 					<td><?= $data['nama_tagihan']; ?></td>
 					<td><?= "Rp. ".number_format("$nominal", 2, ",", "."); ?></td>
@@ -133,6 +133,42 @@ $id_mhs = $_SESSION["id_mhs"];
 	</div>
 </div>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var tagihanRows = document.querySelectorAll('.tagihan-row');
+
+    tagihanRows.forEach(function (row) {
+        var tglJatuhTempo = new Date(row.getAttribute('data-tgl-due')).getTime();
+        var now = new Date().getTime();
+        var timeDiff = tglJatuhTempo - now;
+
+        // Tentukan batas waktu notifikasi (misalnya, 3 hari sebelum jatuh tempo)
+        var notifThreshold = 3 * 24 * 60 * 60 * 1000;
+
+        if (timeDiff < notifThreshold) {
+            // Tampilkan notifikasi
+            showNotification(row.getAttribute('data-nama-tagihan'), tglJatuhTempo);
+        }
+    });
+
+    function showNotification(namaTagihan, tglJatuhTempo) {
+        // Sesuaikan pesan notifikasi sesuai kebutuhan Anda
+        var message = 'Tagihan ' + namaTagihan + ' akan jatuh tempo pada ' + new Date(tglJatuhTempo).toLocaleDateString();
+
+        // Gunakan API notifikasi web untuk menampilkan notifikasi
+        if ('Notification' in window) {
+            Notification.requestPermission().then(function (permission) {
+                if (permission === 'granted') {
+                    var notification = new Notification('Notifikasi Tagihan', {
+                        body: message
+                    });
+                }
+            });
+        }
+    }
+});
+</script>
 
 
 

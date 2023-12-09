@@ -22,7 +22,6 @@ $pdf->SetFont("Arial", "B", 10);
 $pdf->Cell(1,0.8,'No', 1,0);
 $pdf->Cell(6,0.8, 'Nama Kategori', 1,0);
 $pdf->Cell(7,0.8, 'Jumlah Pengeluaran', 1,0);
-
 $pdf->SetFont('Arial', '', 10);
 $no = 1;
 $pdf->ln();

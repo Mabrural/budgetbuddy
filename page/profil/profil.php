@@ -41,7 +41,7 @@ $nama = $_SESSION["username"];
           <h6>Alamat</h6>
           <p><?= $data['alamat'] ?></p>
 
-       <a href="?page=ubahProfil&id_mhs=<?= $data['id_mhs'];?>" data-bs-toggle="modal" data-bs-target="#ubahProfil<?= $no; ?>" class="btn btn-primary"><i class="fas fa-edit"></i> Ubah Profil</a>
+       <a href="?page=ubahProfil&id_mhs=<?= $data['id_mhs'];?>" data-bs-toggle="modal" data-bs-target="#ubahProfil<?= $no; ?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Ubah Profil</a>
       <form action="index.php?form=ubahProfil" method="post">
        <div class="modal fade" id="ubahProfil<?= $no; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-scrollable">
@@ -57,28 +57,28 @@ $nama = $_SESSION["username"];
 				          <input type="hidden" name="id_mhs" value="<?= $data["id_mhs"];?>">
                       <div class="mb-3 card-title">
                           <label>Nama Lengkap</label>
-                          <input type="text" class="form-control" id="nama_mhs" name="nama_mhs" value="<?= $data["nama_mhs"];?>">
+                          <input type="text" class="form-control" id="nama_mhs" name="nama_mhs" value="<?= $data["nama_mhs"];?>" required>
                       </div>
                       <div class="mb-3 card-title">
                           <label>Nama Pengguna</label>
-                          <input type="text" class="form-control" id="username" name="username" value="<?= $data["username"];?>">
+                          <input type="text" class="form-control" id="username" name="username" value="<?= $data["username"];?>" required>
                       </div>
                       
                       <div class="mb-3 card-title">
                           <label>Kata Sandi Baru</label>
-                          <input type="text" class="form-control" id="password" name="password" placeholder="Masukkan Kata Sandi Baru">
+                          <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Kata Sandi Baru" required>
                       </div>
                       <div class="mb-3 card-title">
                           <label>No. HP</label>
-                          <input type="text" class="form-control" id="no_hp" name="no_hp" value="<?= $data["no_hp"];?>">
+                          <input type="text" class="form-control" id="no_hp" name="no_hp" value="<?= $data["no_hp"];?>" required>
                       </div>
                       <div class="mb-3 card-title">
                           <label>Alamat</label>
-                          <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $data["alamat"];?>">
+                          <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $data["alamat"];?>" required>
                       </div>
                       <div class="mb-3 card-title">
                           <label>Email</label>
-                          <input type="text" class="form-control" id="email" name="email" value="<?= $data["email"];?>">
+                          <input type="email" class="form-control" id="email" name="email" value="<?= $data["email"];?>" required>
                       </div>
                    
                   
