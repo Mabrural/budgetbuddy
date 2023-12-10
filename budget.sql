@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 07:24 AM
+-- Generation Time: Dec 10, 2023 at 08:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,8 +41,16 @@ CREATE TABLE `anggaran` (
 --
 
 INSERT INTO `anggaran` (`id_anggaran`, `nama_anggaran`, `nominal`, `tgl_mulai`, `tgl_akhir`, `id_mhs`) VALUES
-(31, 'November 2023', 4500000, '2023-11-01', '2023-11-30', 36),
-(32, 'Desember 2023', 4000000, '2023-12-01', '2023-12-31', 37);
+(35, 'November 2023', 4500000, '2023-11-23', '2023-12-08', 41),
+(37, 'November 2023', 4500000, '2023-11-01', '2023-11-30', 39),
+(40, 'Desember', 1000000, '2023-12-01', '2023-12-30', 39),
+(43, 'Makan besar', 1000000, '2023-11-30', '2023-11-30', 39),
+(44, 'Makan besar', 1000000, '2023-12-01', '2023-12-30', 41),
+(45, 'desember', 1000000, '2023-12-01', '2023-12-31', 42),
+(46, 'Makan besar', 2000000, '2023-12-01', '2023-12-31', 42),
+(50, 'November', 3000000, '2023-11-01', '2023-11-30', 44),
+(51, 'Desember', 3000000, '2023-12-07', '2023-12-07', 44),
+(52, 'Januari 2024', 2000000, '2024-01-01', '2024-01-30', 45);
 
 -- --------------------------------------------------------
 
@@ -55,7 +63,7 @@ CREATE TABLE `catatan_pengeluaran` (
   `id_kategori` int(11) NOT NULL,
   `id_anggaran` int(11) NOT NULL,
   `tgl_catatan` date NOT NULL,
-  `nominal` int(11) NOT NULL,
+  `nominal_catatan` int(11) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
   `id_mhs` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -64,9 +72,31 @@ CREATE TABLE `catatan_pengeluaran` (
 -- Dumping data for table `catatan_pengeluaran`
 --
 
-INSERT INTO `catatan_pengeluaran` (`id_catatan`, `id_kategori`, `id_anggaran`, `tgl_catatan`, `nominal`, `keterangan`, `id_mhs`) VALUES
-(11, 3, 31, '2023-11-19', 20000, 'nasi padang', 36),
-(12, 4, 32, '2023-11-19', 30000, 'bensin', 37);
+INSERT INTO `catatan_pengeluaran` (`id_catatan`, `id_kategori`, `id_anggaran`, `tgl_catatan`, `nominal_catatan`, `keterangan`, `id_mhs`) VALUES
+(24, 3, 35, '2023-11-24', 98000, 'mie aceh', 41),
+(30, 7, 37, '2023-11-27', 100000, 'beli obat migrain', 39),
+(37, 4, 35, '2023-11-27', 45000, 'Bensin pertamax 98', 41),
+(39, 6, 37, '2023-11-30', 1000000, 'UKT', 39),
+(40, 3, 37, '2023-11-28', 30000, 'Makan makan', 39),
+(41, 3, 37, '2023-11-28', 12000, 'nasi padang', 39),
+(42, 8, 37, '2023-11-28', 250000, 'bpjs TK dan KS', 39),
+(43, 8, 37, '2023-11-28', 300000, 'Jasa Raharja', 39),
+(48, 3, 43, '2023-11-30', 500000, 'udang tepung krispi', 39),
+(49, 3, 43, '2023-11-30', 200000, 'Kelapa Muda', 39),
+(54, 3, 35, '2023-12-01', 50000, 'mcd', 41),
+(55, 3, 44, '2023-12-07', 3000000, 'Makan makan', 41),
+(56, 3, 45, '2023-12-07', 10000, 'cimory', 42),
+(57, 3, 45, '2023-12-06', 20000, 'nasi padang', 42),
+(59, 3, 46, '2023-12-07', 3000000, 'nasi padang jumbo', 42),
+(63, 3, 50, '2023-12-07', 20000, 'nasi padang ampera', 44),
+(64, 7, 51, '2023-12-07', 200000, 'beli obat', 44),
+(65, 3, 50, '2023-12-08', 30000, 'makan', 44),
+(66, 4, 50, '2023-11-16', 110000, 'ganti oli motor', 44),
+(67, 9, 50, '2023-11-17', 300000, 'member gym', 44),
+(68, 9, 50, '2023-11-24', 385000, 'beli dumbell', 44),
+(69, 3, 52, '2024-01-09', 98000, 'mie aceh', 45),
+(70, 4, 52, '2024-01-10', 1000000, 'nasi padang ampera', 45),
+(71, 6, 52, '2024-01-11', 1000000, 'kuliah', 45);
 
 -- --------------------------------------------------------
 
@@ -115,8 +145,11 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id_mhs`, `nama_mhs`, `username`, `password`, `no_hp`, `alamat`, `email`) VALUES
-(36, 'Rizky Nurfadilah', 'kiki_dila', 'Kikicantik123', '081209891212', 'Nongsa', 'Kiki12@gmail.com'),
-(37, 'Rudi Setiawan', 'setiawan', 'Rud090912', '087788990000', 'Nongsa', 'Rudi01@gmail.com');
+(39, 'Muhammad Mabrur Al Mutaqi', 'Mabrur Al Mutaqi', '$2y$10$5MCl2hYjUGGRsUOfxgip9Ov3khpo342UVx2tJJkIBJv.M8/IOOP9q', '081100001212', 'Batam Center', 'mabruralmutaqi@gmail.com'),
+(41, 'kiki', 'kiki', '$2y$10$vX/Kk/UWqmOdt6uudrQMJeaM9rki.QwoY89l/YGY2RoAzEnMk3KQm', '082285686292', 'Nongsa', 'mabruralmutaqi@gmail.com'),
+(42, 'Isyabel Salsabilla', 'abel', '$2y$10$jyS7dRw796W/tmP7ZWC6EufqZGZhJJ/GYigO8tXcjPgPhOvVIEK3O', '1231231', 'Batam center', 'abel123@gmail.com'),
+(44, 'Ahmad Azka Salam', 'Azka', '$2y$10$Yhpj3wBpAefav9sr0V//xe5EkhEJCvBtZzI/I3EB15Gv4PlwUuzcW', '1231231', 'Botania', 'btm@gmail.com'),
+(45, 'Shah Rizal', 'rizal26', '$2y$10$aY4LPrVEMXqzRbZlaT.hQuY1lOoQTrikLumN0EsxD9GuX02t05gnW', '082285686292', 'Taman Sari Hijau', 'shahrizal71531@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -137,8 +170,11 @@ CREATE TABLE `tagihan` (
 --
 
 INSERT INTO `tagihan` (`id_tagihan`, `nama_tagihan`, `nominal`, `tgl_due`, `id_mhs`) VALUES
-(15, 'Wifi', 300000, '2023-12-01', 36),
-(16, 'Air', 40000, '2023-12-20', 37);
+(17, 'cicilan motor', 1000000, '2023-12-12', 39),
+(18, 'wifi', 300000, '2023-11-30', 41),
+(20, 'wifi', 295000, '2023-12-12', 39),
+(22, 'mobil', 3000000, '2023-12-29', 44),
+(28, 'Cicilan motor', 900000, '2023-12-10', 45);
 
 --
 -- Indexes for dumped tables
@@ -187,13 +223,13 @@ ALTER TABLE `tagihan`
 -- AUTO_INCREMENT for table `anggaran`
 --
 ALTER TABLE `anggaran`
-  MODIFY `id_anggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_anggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `catatan_pengeluaran`
 --
 ALTER TABLE `catatan_pengeluaran`
-  MODIFY `id_catatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_catatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -205,13 +241,13 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tagihan`
 --
 ALTER TABLE `tagihan`
-  MODIFY `id_tagihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_tagihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
