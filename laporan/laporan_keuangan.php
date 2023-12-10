@@ -18,6 +18,7 @@ $pdf->SetFont("Arial", "B", 14);
 $pdf->Cell(15.5, 0.7, "DATA LAPORAN KEUANGAN", 0,10,'C');
 $pdf->ln();
 $pdf->ln();
+
 $pdf->SetFont("Arial", "B", 10);
 $pdf->Cell(1,0.8,'No', 1,0);
 $pdf->Cell(6,0.8, 'Nama Kategori', 1,0);

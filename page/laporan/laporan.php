@@ -2,13 +2,14 @@
 $conn = mysqli_connect("localhost", "root", "78789898", "budget");
 $id_mhs = $_SESSION["id_mhs"];
 ?>
+
 <div class="col-md-12 col-lg-12 ">
 <!-- <h4 class="text-center">Laporan Keuangan</h4>
 				<hr> -->
 			  <h2 class="text-right" style="float: right; font-size: 25px;">Laporan Keuangan </h2>
         <br><br>
        
-        <center><div id="piechart" style="width: 100%; max-width:700px; height: 500px; min-width: 100%;" class="row-md-12"></div></center>
+        <center><div id="piechart" style="width: 100%; max-width:700px; height: 500px; min-width: 100%; margin: auto;" class="col-lg-12 col-md-12 col-sm-12"></div></center>
         <!-- <center><canvas id="myChart" style="width:100%; max-width:700px min-width: 100px;" class="row-md-12"></canvas></center>  -->
        
        <br>
@@ -30,34 +31,7 @@ $id_mhs = $_SESSION["id_mhs"];
           <div class="mx-2 mt-2">
             <a href="laporan/laporan_keuangan.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke PDF</button></a>
           </div>
-        <!-- Form Filter -->
-        <!-- <form class="d-flex col-lg-4 col-md-12 col-sm-12" role="search" action="" method="POST">
-            
-            <div class="col-lg-8">
-              <select class="form-select" name="filter_anggaran">
-                  <option value="">--Pilih Anggaran--</option>
-                  <?php
-                  // Ambil data anggaran dari database
-                  $result = mysqli_query($koneksi, "SELECT * FROM anggaran WHERE id_mhs=$id_mhs");
-                  while ($row = mysqli_fetch_assoc($result)) {
-                      echo "<option value='" . $row['id_anggaran'] . "'>" . $row['nama_anggaran'] . "</option>";
-                  }
-                  ?>
-              </select>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-12">
-                <button class="btn btn-outline-dark bg-dark" type="submit"><i class="fa-solid fa-filter bg-dark text-white fa-sm"></i></button>
-            </div>
-            <div class="col-lg-5">
-                <a href="export.php"><button class="btn btn-success btn-sm"><i class="fas fa-download fa-sm"></i> Ekspor ke PDF</button></a>        
-            </div>
-        </form> -->
-        
-        <!-- Akhir Form Filter -->
-
-
-
-
+       
 				<div class="card-body tab table-responsive" style="height: 500px;">
 
 					<table class="table table-hover table-responsive overflow-scroll">
@@ -66,7 +40,7 @@ $id_mhs = $_SESSION["id_mhs"];
               <th scope="col">No</th>
               <th scope="col">Nama Kategori</th>
               <th scope="col">Jumlah Pengeluaran</th>
-              <th scope="col">Aksi</th>
+              <!-- <th scope="col">Aksi</th> -->
             </tr>
 					  </thead>
             
@@ -106,9 +80,9 @@ $id_mhs = $_SESSION["id_mhs"];
               <td><?= $no++;?></td>
               <td><?= $data['nama_kategori']?></td>
               <td><?= "Rp. ".number_format("$nominal", 2, ",", ".")?></td>
-              <td>
+              <!-- <td>
                 <a href="?page=laporan&id_kategori=<?= $data['id_kategori'];?>" data-bs-toggle="modal" data-bs-target="#detail">Detail</a>
-              </td>
+              </td> -->
             </tr>
 
 					  </tbody>
@@ -146,7 +120,7 @@ $id_mhs = $_SESSION["id_mhs"];
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Makanan</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail <?= $data['nama_kategori'];?></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -202,7 +176,8 @@ $id_mhs = $_SESSION["id_mhs"];
     </div>
   </div>
 </div>
-              <?php
+
+             <?php
                   // }
                 ?>
 
