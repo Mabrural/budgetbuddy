@@ -1,5 +1,4 @@
 
-
     <div class="card-body">
         <h2>Halaman Utama</h2>
         <p>Budget Buddy adalah sebuah aplikasi berbasis website yang dibuat untuk membantu individu dan keluarga mengelola keuangannya dengan lebih baik. Pengelolaan keuangan yang baik dapat membantu pengguna untuk melacak pengeluaran secara akurat.</p>
